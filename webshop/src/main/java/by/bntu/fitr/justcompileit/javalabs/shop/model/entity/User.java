@@ -1,7 +1,7 @@
 package by.bntu.fitr.justcompileit.javalabs.shop.model.entity;
 
-import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 public class User extends Human {
 
@@ -10,22 +10,25 @@ public class User extends Human {
     private String username;
     private String password;
     private boolean active;
+    private Set<Role> roles;
 
     static {
-        amount=0L;
+        amount = 1L;
     }
+
     {
-        this.id=amount++;
+        this.id = amount++;
     }
 
     public User() {
     }
 
-    public User(double money, String username, String password, boolean active) {
+    public User(double money, String username, String password, boolean active, Set<Role> roles) {
         super(money);
         this.username = username;
         this.password = password;
         this.active = active;
+        this.roles = roles;
     }
 
     public User(User user) {
@@ -33,6 +36,7 @@ public class User extends Human {
         this.username = user.username;
         this.password = user.password;
         this.active = user.active;
+        this.roles = user.roles;
     }
 
     public Long getId() {
@@ -67,6 +71,14 @@ public class User extends Human {
         this.active = active;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -76,17 +88,18 @@ public class User extends Human {
         return active == user.active &&
                 id.equals(user.id) &&
                 username.equals(user.username) &&
-                password.equals(user.password);
+                password.equals(user.password) &&
+                roles.equals(user.roles);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), id, username, password, active);
+        return Objects.hash(super.hashCode(), id, username, password, active, roles);
     }
 
     @Override
     public String toString() {
         return "User:" + " id = " + id + ", username = " + username +
-                ", password = " + password +" ,money = "+super.getMoney()+ ", active = " + active + ".";
+                ", password = " + password + " ,money = " + super.getMoney() + ", active = " + active + ".";
     }
 }

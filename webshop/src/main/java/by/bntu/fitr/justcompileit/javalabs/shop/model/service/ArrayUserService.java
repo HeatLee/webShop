@@ -1,14 +1,16 @@
-package by.bntu.fitr.justcompileit.javalabs.shop.service;
+package by.bntu.fitr.justcompileit.javalabs.shop.model.service;
 
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.User;
-import by.bntu.fitr.justcompileit.javalabs.shop.util.JsonWorker;
-import org.springframework.stereotype.Repository;
+import by.bntu.fitr.justcompileit.javalabs.shop.util.JsonDeserializer;
+import by.bntu.fitr.justcompileit.javalabs.shop.util.JsonSerializer;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 
-@Repository
-public class UserServiceImpl implements UserService {
+@Service
+public class ArrayUserService implements UserService {
 
+    private static final String USERS_FILE_NAME = "dataSource/users.json";
     private static final int BEGIN_VALUE = 0;
     private static final int OFFSET = 1;
     private static final int NUMBER_FOR_CODE = 31;
@@ -17,32 +19,28 @@ public class UserServiceImpl implements UserService {
     private int size;
 
 
-    public UserServiceImpl() throws Exception{
-        this.service = JsonWorker.getUserList().findAll();
+    public ArrayUserService() {
+        this.service = new JsonDeserializer<User>(USERS_FILE_NAME).readArray(User[].class);
         this.size = this.service.length;
     }
 
-    public UserServiceImpl(User[] service) {
+    public ArrayUserService(User[] service) {
         this.service = service;
         this.size = service.length;
     }
 
-    @Override
     public int size() {
         return size;
     }
 
-    @Override
     public User[] findAll() {
         return service;
     }
 
-    @Override
     public boolean isExist(User user) {
         return (findByUsername(user.getUsername()) == null) ? false : true;
     }
 
-    @Override
     public boolean save(User user) {
         if (user != null) {
             User[] newService = new User[size + OFFSET];
@@ -56,7 +54,6 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
-    @Override
     public User remove(User user) {
         User userDeleted = findByUsername(user.getUsername());
         if (userDeleted != null) {
@@ -73,7 +70,6 @@ public class UserServiceImpl implements UserService {
         return userDeleted;
     }
 
-    @Override
     public User findByUsername(String username) {
         User user = null;
         for (int i = 0; i < service.length; i++) {
@@ -89,7 +85,7 @@ public class UserServiceImpl implements UserService {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserServiceImpl that = (UserServiceImpl) o;
+        ArrayUserService that = (ArrayUserService) o;
         return size == that.size &&
                 Arrays.equals(service, that.service);
     }

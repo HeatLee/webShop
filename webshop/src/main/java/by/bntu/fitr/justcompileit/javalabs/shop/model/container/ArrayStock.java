@@ -1,26 +1,31 @@
-package by.bntu.fitr.justcompileit.javalabs.shop.container;
+package by.bntu.fitr.justcompileit.javalabs.shop.model.container;
 
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
-import by.bntu.fitr.justcompileit.javalabs.shop.util.IndexOutOfBoundsContainerException;
+import by.bntu.fitr.justcompileit.javalabs.shop.model.exceptions.logic.IndexOutOfBoundsContainerException;
+import by.bntu.fitr.justcompileit.javalabs.shop.util.JsonDeserializer;
+import org.springframework.stereotype.Repository;
 
 import java.util.Arrays;
 
-public class StockImpl {
+@Repository
+public class ArrayStock implements Stock {
 
+    private static final String PRODUCTS_FILE_NAME = "dataSource/products.json";
     private static final int BEGIN_VALUE = 0;
     private static final int OFFSET = 1;
     private static final int DEFAULT_INDEX = -1;
     private static final int NUMBER_FOR_CODE = 31;
+    private static final String EXCEPTION_DESCRIBE = "Out of bound container!";
 
     private Product[] ambry;
     private int size;
 
-    public StockImpl() {
-        this.ambry = new Product[0];
-        this.size = 0;
+    public ArrayStock() {
+        this.ambry = new JsonDeserializer<Product>(PRODUCTS_FILE_NAME).readArray(Product[].class);
+        this.size = this.ambry.length;
     }
 
-    public StockImpl(Product[] products) {
+    public ArrayStock(Product[] products) {
         this.ambry = Arrays.copyOf(products, products.length);
         this.size = products.length;
     }
@@ -38,7 +43,7 @@ public class StockImpl {
 
     private void belongRange(int index) throws IndexOutOfBoundsContainerException {
         if (index < 0 && index > size) {
-            throw new IndexOutOfBoundsContainerException();
+            throw new IndexOutOfBoundsContainerException(EXCEPTION_DESCRIBE);
         }
     }
 
@@ -129,11 +134,15 @@ public class StockImpl {
         return element;
     }
 
+    public Product[] getAll() {
+        return ambry;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        StockImpl stock = (StockImpl) o;
+        ArrayStock stock = (ArrayStock) o;
         return size == stock.size &&
                 Arrays.equals(ambry, stock.ambry);
     }

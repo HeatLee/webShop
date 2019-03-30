@@ -1,0 +1,6 @@
+[ {"id":1,"price": 10,"fileName": "orange.png","name": "orange"},{"id":2,"price": 10,"fileName": "apple.png","name": "apple"},
+  {"id":3,"price": 10,"fileName": "banan.png","name": "banan"}, {"id":4,"price": 10,"fileName": "pineapple.png","name": "pineapple"},
+  {"id":5,"price": 10,"fileName": "pear.png","name": "pear"},{"id":6,"price": 10,"fileName": "grapes.png","name": "grapes"},
+  {"id":7,"price": 10,"fileName": "passion_fruit.png","name": "passion fruit"},{"id":8,"price": 10,"fileName": "pomelo.png","name": "pomelo"},
+  {"id":9,"price": 10,"fileName": "mandarin.png","name": "mandarin"},{"id":10,"price": 10,"fileName": "plum.png","name": "plum"},
+  {"id":11,"price": 10,"fileName": "mango.png","name": "mango"},{"id":12,"price": 10,"fileName": "kiwi.png","name": "kiwi"}]

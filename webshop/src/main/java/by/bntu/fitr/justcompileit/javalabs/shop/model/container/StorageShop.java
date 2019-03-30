@@ -1,4 +1,4 @@
-package by.bntu.fitr.justcompileit.javalabs.shop.container;
+package by.bntu.fitr.justcompileit.javalabs.shop.model.container;
 
 import java.util.Arrays;
 

@@ -1,4 +1,4 @@
-package by.bntu.fitr.justcompileit.javalabs.shop.service;
+package by.bntu.fitr.justcompileit.javalabs.shop.model.service;
 
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.User;
 import org.springframework.stereotype.Service;

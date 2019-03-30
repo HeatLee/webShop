@@ -1,7 +1,8 @@
-package by.bntu.fitr.justcompileit.javalabs.shop.service;
+package by.bntu.fitr.justcompileit.javalabs.shop.model.service;
 
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Role;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.User;
+import by.bntu.fitr.justcompileit.javalabs.shop.model.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,7 +24,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userService.findByUsername(username);
         Set<GrantedAuthority> roles = new HashSet<>();
-        roles.add(new SimpleGrantedAuthority(Role.USER.name()));
+        for (Role role : user.getRoles()) {
+            roles.add(new SimpleGrantedAuthority(role.name()));
+        }
         UserDetails userDetails =
                 new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), roles);
         return userDetails;

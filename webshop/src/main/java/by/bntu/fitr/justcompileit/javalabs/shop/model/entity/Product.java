@@ -1,35 +1,44 @@
 package by.bntu.fitr.justcompileit.javalabs.shop.model.entity;
 
+import java.util.Objects;
+
 public class Product {
 
+    private static Long amount;
+    private Long id;
     private double price;
-    private String productName;
-    private int count;
+    private String fileName;
+    private String name;
+
+    static {
+        amount = 1L;
+    }
+
+    {
+        this.id = amount++;
+    }
 
     public Product() {
-        price = 1;
-        count = 1;
-        productName = "no name";
     }
 
-    public Product(String productName, double price, int count) {
+    public Product(double price, String fileName, String name) {
         this.price = price;
-        if (this.price < 0) {
-            this.price = 1;
-        }
-        this.productName = productName;
-        this.count = count;
-        if (this.count < 0) {
-            this.count = 0;
-        }
+        this.fileName = fileName;
+        this.name = name;
     }
 
-    public String getProductName() {
-        return productName;
+    public Product(Product product) {
+        this.price = product.price;
+        this.fileName = product.fileName;
+        this.name = product.name;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public double getPrice() {
@@ -40,17 +49,38 @@ public class Product {
         this.price = price;
     }
 
-    public int getCount() {
-        return count;
+    public String getFileName() {
+        return fileName;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Double.compare(product.price, price) == 0 &&
+                name.equals(product.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(price, name);
     }
 
     @Override
     public String toString() {
-        return "Product: " + "productName = " + productName + ", price = " + price + ", productName = " +
-                productName + ", count = " + count + ".";
+        return "Product{" + "price = " + price + ", fileName = " + fileName + ", name = " + name + "}";
     }
 }

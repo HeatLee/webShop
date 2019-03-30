@@ -1,0 +1,5 @@
+div.card-columns {
+    -webkit-column-gap: 50px;
+    -webkit-column-count: 4;
+}
+
