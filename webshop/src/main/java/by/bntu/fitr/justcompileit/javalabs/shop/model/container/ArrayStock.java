@@ -10,13 +10,13 @@ import java.util.Arrays;
 @Repository
 public class ArrayStock implements Stock {
 
-    private static final int OFFSET = 1;
-    private static final int BEGIN_VALUE = 0;
-    private static final int DEFAULT_INDEX = -1;
-    private static final int NUMBER_FOR_CODE = 31;
+    public static final int OFFSET = 1;
+    public static final int BEGIN_VALUE = 0;
+    public static final int DEFAULT_INDEX = -1;
+    public static final int NUMBER_FOR_CODE = 31;
 
-    private static final String EXCEPTION_DESCRIPTION = "Out of bound container!";
-    private static final String PRODUCTS_SOURCE_FILE = "dataSource/products.json";
+    public static final String EXCEPTION_DESCRIPTION = "Index out of bound container!";
+    public static final String PRODUCTS_SOURCE_FILE = "dataSource/products.json";
 
     private Product[] productStock;
     private int size;
@@ -32,9 +32,7 @@ public class ArrayStock implements Stock {
     }
 
     public Product get(int indexProduct) throws IndexOutOfBoundsContainerException {
-        if (indexProduct < BEGIN_VALUE || indexProduct > size) {
-            throw new IndexOutOfBoundsContainerException(EXCEPTION_DESCRIPTION);
-        }
+        belongRange(indexProduct);
         return productStock[indexProduct];
     }
 
@@ -66,12 +64,15 @@ public class ArrayStock implements Stock {
     }
 
     private void belongRange(int index) throws IndexOutOfBoundsContainerException {
-        if (index < 0 || index > size) {
+        if ((index < BEGIN_VALUE || index > size) && size > BEGIN_VALUE) {
+            throw new IndexOutOfBoundsContainerException(EXCEPTION_DESCRIPTION);
+        }
+        if (size == BEGIN_VALUE) {
             throw new IndexOutOfBoundsContainerException(EXCEPTION_DESCRIPTION);
         }
     }
 
-    public boolean contains(Product product) {
+    public boolean isContains(Product product) {
         return indexOf(product) > DEFAULT_INDEX;
     }
 
@@ -118,6 +119,7 @@ public class ArrayStock implements Stock {
         for (int i = 0; i < size; i++) {
             if (productStock[i] == product) {
                 indexElement = i;
+                break;
             }
         }
         return indexElement;

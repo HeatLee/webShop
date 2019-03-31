@@ -17,8 +17,6 @@ public interface Stock {
 
     boolean addAll(Product[] products);
 
-    boolean contains(Product product);
-
     void clear();
 
     boolean delete(Product product);
@@ -28,6 +26,8 @@ public interface Stock {
     int size();
 
     int indexOf(Product product);
+
+    boolean isContains(Product product);
 
     Product[] toArray(Product[] array);
 

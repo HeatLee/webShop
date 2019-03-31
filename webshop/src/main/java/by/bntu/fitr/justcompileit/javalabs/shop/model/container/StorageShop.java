@@ -6,12 +6,12 @@ import java.util.Arrays;
 
 public class StorageShop<T> implements Storable<T> {
 
-    private static final String INDEX_OF_BOUND_EXCEPTION_DESCRIPTION = "Out of bound container!";
+    public static final String INDEX_OF_BOUND_EXCEPTION_DESCRIPTION = "Out of bound container!";
 
-    private static final int BEGIN_VALUE = 0;
-    private static final int OFFSET = 1;
-    private static final int DEFAULT_INDEX = -1;
-    private static final int HASH_NUM = 31;
+    public static final int BEGIN_VALUE = 0;
+    public static final int OFFSET = 1;
+    public static final int DEFAULT_INDEX = -1;
+    public static final int HASH_NUM = 31;
 
     private Object[] repository;
     private int size;

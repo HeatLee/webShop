@@ -2,8 +2,8 @@ package by.bntu.fitr.justcompileit.javalabs.shop.controller;
 
 
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Role;
-import by.bntu.fitr.justcompileit.javalabs.shop.model.service.UserService;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.User;
+import by.bntu.fitr.justcompileit.javalabs.shop.model.service.UserService;
 import by.bntu.fitr.justcompileit.javalabs.shop.util.JsonSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,7 +38,7 @@ public class RegistrationController {
         user.setActive(true);
         user.setRoles(EnumSet.of(Role.USER));
         userService.save(user);
-        new JsonSerializer<User>(USERS_FILE_NAME).writeArray(userService.findAll());
+        new JsonSerializer<User>(USERS_FILE_NAME).writeArray(userService.getAll());
 
         return "redirect:/login";
     }

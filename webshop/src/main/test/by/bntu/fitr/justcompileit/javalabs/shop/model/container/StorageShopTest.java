@@ -1,26 +1,61 @@
 package by.bntu.fitr.justcompileit.javalabs.shop.model.container;
 
-import by.bntu.fitr.justcompileit.javalabs.shop.model.exceptions.logic.IndexOutOfBoundsContainerException;
+import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-
 public class StorageShopTest {
+
+    @Before
+    public void setUp() {
+
+    }
 
     @Test
     public void delete() {
 
-        StorageShop<Integer> storageShop = new StorageShop<>(new Integer[]{1, 2, 3,
-                4, 5, 6});
+    }
 
-        System.out.println(storageShop.size());
-        try {
-            storageShop.delete(3);
-        } catch (IndexOutOfBoundsContainerException e) {
-            e.printStackTrace();
-        }
+    @Test
+    public void get() {
+    }
 
-        StorageShop<Integer> expected = new StorageShop<>(new Integer[]{1, 2, 4, 5, 6});
-        assertEquals(expected, storageShop);
+    @Test
+    public void set() {
+    }
+
+    @Test
+    public void add() {
+    }
+
+    @Test
+    public void addAll() {
+    }
+
+    @Test
+    public void contains() {
+    }
+
+    @Test
+    public void clear() {
+    }
+
+    @Test
+    public void size() {
+    }
+
+    @Test
+    public void indexOf() {
+    }
+
+    @Test
+    public void toArray() {
+    }
+
+    @Test
+    public void toArray1() {
+    }
+
+    @Test
+    public void equals1() {
     }
 }

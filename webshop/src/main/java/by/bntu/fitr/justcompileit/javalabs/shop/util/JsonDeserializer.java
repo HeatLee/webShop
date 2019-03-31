@@ -10,11 +10,10 @@ import java.util.Scanner;
 
 public class JsonDeserializer<T> implements Deserializer<T> {
 
-    private static final String ERROR_OPEN_FILE = " cannot opened!";
-    private static final String SUCCESSFULLY_READ_FILE = " successfully read.";
+    public static final String ERROR_OPEN_FILE = " cannot opened!";
+    public static final String SUCCESSFULLY_READ_FILE = " successfully read.";
 
-    private static final Logger log = Logger.getLogger(JsonDeserializer.class);
-
+    private Logger log = Logger.getLogger(JsonDeserializer.class);
     private String fileName;
 
     public JsonDeserializer(String fileName) {

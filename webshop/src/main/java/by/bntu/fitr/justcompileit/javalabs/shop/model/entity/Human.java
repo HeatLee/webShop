@@ -1,29 +1,30 @@
 package by.bntu.fitr.justcompileit.javalabs.shop.model.entity;
 
+import by.bntu.fitr.justcompileit.javalabs.shop.model.container.Stock;
+
 import java.util.Objects;
 
 public class Human {
 
-    private double money;
+    private Stock stock;
 
     public Human() {
-        money = 0;
     }
 
-    public Human(double money) {
-        this.money = money;
+    public Human(Stock stock) {
+        this.stock = stock;
     }
 
     public Human(Human human) {
-        this.money = human.money;
+        this.stock = human.stock;
     }
 
-    public double getMoney() {
-        return money;
+    public Stock getStock() {
+        return stock;
     }
 
-    public void setMoney(double money) {
-        this.money = money;
+    public void setStock(Stock stock) {
+        this.stock = stock;
     }
 
     @Override
@@ -31,16 +32,18 @@ public class Human {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Human human = (Human) o;
-        return Double.compare(human.money, money) == 0;
+        return Objects.equals(stock, human.stock);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(money);
+        return Objects.hash(stock);
     }
 
     @Override
     public String toString() {
-        return "Human: " + "money = " + money + ".";
+        return "Human{" +
+                "stock=" + stock +
+                '}';
     }
 }
