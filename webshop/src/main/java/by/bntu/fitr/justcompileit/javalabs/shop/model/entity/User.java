@@ -6,15 +6,18 @@ import java.util.Set;
 public class User extends Human {
 
     private static Long amount;
-    private Long id;
-    private String username;
-    private String password;
-    private boolean active;
-    private Set<Role> roles;
 
     static {
         amount = 1L;
     }
+
+    private Long id;
+
+    private String username;
+    private String password;
+
+    private boolean active;
+    private Set<Role> roles;
 
     {
         this.id = amount++;

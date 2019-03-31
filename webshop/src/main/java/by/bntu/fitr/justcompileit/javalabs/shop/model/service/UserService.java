@@ -6,16 +6,16 @@ import org.springframework.stereotype.Service;
 @Service
 public interface UserService {
 
-    boolean isExist(User user);
-
-    int size();
-
     boolean save(User user);
 
-    User remove(User user);
+    int size();
 
     User findByUsername(String username);
 
     User[] findAll();
+
+    boolean isExist(User user);
+
+    User remove(User user);
 
 }

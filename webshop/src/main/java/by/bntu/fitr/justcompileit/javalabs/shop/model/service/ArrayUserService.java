@@ -2,7 +2,6 @@ package by.bntu.fitr.justcompileit.javalabs.shop.model.service;
 
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.User;
 import by.bntu.fitr.justcompileit.javalabs.shop.util.JsonDeserializer;
-import by.bntu.fitr.justcompileit.javalabs.shop.util.JsonSerializer;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -11,17 +10,17 @@ import java.util.Arrays;
 public class ArrayUserService implements UserService {
 
     private static final String USERS_FILE_NAME = "dataSource/users.json";
-    private static final int BEGIN_VALUE = 0;
+
     private static final int OFFSET = 1;
+    private static final int BEGIN_VALUE = 0;
     private static final int NUMBER_FOR_CODE = 31;
 
     private User[] service;
     private int size;
 
-
     public ArrayUserService() {
-        this.service = new JsonDeserializer<User>(USERS_FILE_NAME).readArray(User[].class);
-        this.size = this.service.length;
+        service = new JsonDeserializer<User>(USERS_FILE_NAME).readArray(User[].class);
+        size = this.service.length;
     }
 
     public ArrayUserService(User[] service) {
@@ -38,7 +37,7 @@ public class ArrayUserService implements UserService {
     }
 
     public boolean isExist(User user) {
-        return (findByUsername(user.getUsername()) == null) ? false : true;
+        return findByUsername(user.getUsername()) != null;
     }
 
     public boolean save(User user) {
@@ -72,9 +71,9 @@ public class ArrayUserService implements UserService {
 
     public User findByUsername(String username) {
         User user = null;
-        for (int i = 0; i < service.length; i++) {
-            if (service[i].getUsername().equals(username)) {
-                user = service[i];
+        for (User user1 : service) {
+            if (user1.getUsername().equals(username)) {
+                user = user1;
                 break;
             }
         }

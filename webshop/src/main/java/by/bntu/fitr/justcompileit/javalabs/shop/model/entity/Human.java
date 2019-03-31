@@ -6,16 +6,16 @@ public class Human {
 
     private double money;
 
-    public Human(){
-        money=0;
+    public Human() {
+        money = 0;
     }
 
-    public Human(double money){
-        this.money=money;
+    public Human(double money) {
+        this.money = money;
     }
 
-    public Human(Human human){
-        this.money=human.money;
+    public Human(Human human) {
+        this.money = human.money;
     }
 
     public double getMoney() {

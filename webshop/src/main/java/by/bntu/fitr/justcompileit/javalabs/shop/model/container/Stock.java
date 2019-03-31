@@ -7,11 +7,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface Stock {
 
-    Product[] toArray(Product[] array);
+    Product get(int index) throws IndexOutOfBoundsContainerException;
 
-    int size();
-
-    boolean contains(Product product);
+    Product[] getAll();
 
     Product set(int index, Product newProduct) throws IndexOutOfBoundsContainerException;
 
@@ -19,16 +17,18 @@ public interface Stock {
 
     boolean addAll(Product[] products);
 
-    int indexOf(Product product);
+    boolean contains(Product product);
+
+    void clear();
 
     boolean delete(Product product);
 
     Product delete(int index) throws IndexOutOfBoundsContainerException;
 
-    void clear();
+    int size();
 
-    Product get(int index) throws IndexOutOfBoundsContainerException;
+    int indexOf(Product product);
 
-    Product[] getAll();
+    Product[] toArray(Product[] array);
 
 }

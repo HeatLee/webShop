@@ -10,7 +10,7 @@
         </div>
         <div class="col-sm">
             <div class="profile-component">
-                <h3 class="text-center">${product.name} - ${product.price} $</h3>
+                <h3 class="text-center">${product.productName} - ${product.cost} $</h3>
                 <button class="btn btn-success text-center" type="submit">Add to basket</button>
             </div>
         </div>
