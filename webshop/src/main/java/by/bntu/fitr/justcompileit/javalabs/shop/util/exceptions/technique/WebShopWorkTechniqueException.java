@@ -1,6 +1,6 @@
-package by.bntu.fitr.justcompileit.javalabs.shop.model.exceptions.technique;
+package by.bntu.fitr.justcompileit.javalabs.shop.util.exceptions.technique;
 
-import by.bntu.fitr.justcompileit.javalabs.shop.model.exceptions.WebShopWorkException;
+import by.bntu.fitr.justcompileit.javalabs.shop.util.exceptions.WebShopWorkException;
 
 public class WebShopWorkTechniqueException extends WebShopWorkException {
 

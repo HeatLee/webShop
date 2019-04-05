@@ -2,7 +2,6 @@ package by.bntu.fitr.justcompileit.javalabs.shop.model.service;
 
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Role;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.User;
-import by.bntu.fitr.justcompileit.javalabs.shop.model.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

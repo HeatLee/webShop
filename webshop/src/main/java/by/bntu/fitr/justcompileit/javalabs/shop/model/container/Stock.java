@@ -1,19 +1,19 @@
 package by.bntu.fitr.justcompileit.javalabs.shop.model.container;
 
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
-import by.bntu.fitr.justcompileit.javalabs.shop.model.exceptions.logic.IndexOutOfBoundsContainerException;
-import org.springframework.stereotype.Repository;
+import by.bntu.fitr.justcompileit.javalabs.shop.util.exceptions.logic.IndexOutOfBoundsStockException;
 
-@Repository
 public interface Stock {
 
-    Product[] toArray(Product[] array);
+    Product[] toArray();
+
+    Product[] toArray(Product[] products);
 
     int size();
 
     boolean contains(Product product);
 
-    Product set(int index, Product newProduct) throws IndexOutOfBoundsContainerException;
+    Product set(int index, Product newProduct) throws IndexOutOfBoundsStockException;
 
     boolean add(Product product);
 
@@ -23,12 +23,10 @@ public interface Stock {
 
     boolean delete(Product product);
 
-    Product delete(int index) throws IndexOutOfBoundsContainerException;
+    Product delete(int index) throws IndexOutOfBoundsStockException;
 
     void clear();
 
-    Product get(int index) throws IndexOutOfBoundsContainerException;
-
-    Product[] getAll();
+    Product get(int index) throws IndexOutOfBoundsStockException;
 
 }

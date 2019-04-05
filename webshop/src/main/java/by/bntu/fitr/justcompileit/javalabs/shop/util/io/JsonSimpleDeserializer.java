@@ -1,4 +1,4 @@
-package by.bntu.fitr.justcompileit.javalabs.shop.util;
+package by.bntu.fitr.justcompileit.javalabs.shop.util.io;
 
 import com.google.gson.Gson;
 import org.apache.log4j.Logger;
@@ -8,15 +8,15 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.Scanner;
 
-public class JsonDeserializer<T> implements Deserializer<T> {
+public class JsonSimpleDeserializer<T> implements SimpleDeserializer<T> {
 
-    private static final Logger log = Logger.getLogger(JsonDeserializer.class);
+    private static final Logger log = Logger.getLogger(JsonSimpleDeserializer.class);
     private static final String ERROR_OPEN_FILE = " cannot opened!";
     private static final String SUCCESSFULY_READ_FILE = " successfuly read.";
 
     private String fileName;
 
-    public JsonDeserializer(String fileName) {
+    public JsonSimpleDeserializer(String fileName) {
         this.fileName = fileName;
     }
 

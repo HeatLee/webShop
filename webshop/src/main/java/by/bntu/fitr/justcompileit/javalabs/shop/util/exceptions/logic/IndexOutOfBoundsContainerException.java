@@ -1,4 +1,4 @@
-package by.bntu.fitr.justcompileit.javalabs.shop.model.exceptions.logic;
+package by.bntu.fitr.justcompileit.javalabs.shop.util.exceptions.logic;
 
 public class IndexOutOfBoundsContainerException extends WebShopWorkLogicException {
 

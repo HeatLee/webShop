@@ -1,21 +1,21 @@
 package by.bntu.fitr.justcompileit.javalabs.shop.model.service;
 
+import by.bntu.fitr.justcompileit.javalabs.shop.model.container.UserList;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.User;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface UserService {
 
-    boolean isExist(User user);
-
-    int size();
+    boolean exists(User user);
 
     boolean save(User user);
 
-    User remove(User user);
+    boolean remove(User user);
+
+    void update();
 
     User findByUsername(String username);
 
-    User[] findAll();
-
+    UserList findAll();
 }

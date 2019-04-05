@@ -1,5 +1,7 @@
 package by.bntu.fitr.justcompileit.javalabs.shop.model.container;
 
+import by.bntu.fitr.justcompileit.javalabs.shop.util.exceptions.logic.IndexOutOfBoundsContainerException;
+
 public interface Storable<T> {
 
     Object[] toArray();
@@ -10,7 +12,7 @@ public interface Storable<T> {
 
     boolean contains(T elemnt);
 
-    T set(int index, T newElement);
+    T set(int index, T newElement) throws IndexOutOfBoundsContainerException;
 
     boolean add(T element);
 
@@ -20,10 +22,10 @@ public interface Storable<T> {
 
     boolean delete(T element);
 
-    T delete(int index);
+    T delete(int index) throws IndexOutOfBoundsContainerException;
 
     void clear();
 
-    T get(int index);
+    T get(int index) throws IndexOutOfBoundsContainerException;
 
 }

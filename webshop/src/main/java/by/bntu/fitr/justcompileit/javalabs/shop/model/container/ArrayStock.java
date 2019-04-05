@@ -1,33 +1,33 @@
 package by.bntu.fitr.justcompileit.javalabs.shop.model.container;
 
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
-import by.bntu.fitr.justcompileit.javalabs.shop.model.exceptions.logic.IndexOutOfBoundsContainerException;
-import by.bntu.fitr.justcompileit.javalabs.shop.util.JsonDeserializer;
-import org.springframework.stereotype.Repository;
+import by.bntu.fitr.justcompileit.javalabs.shop.util.exceptions.logic.IndexOutOfBoundsStockException;
 
 import java.util.Arrays;
 
-@Repository
 public class ArrayStock implements Stock {
 
-    private static final String PRODUCTS_FILE_NAME = "dataSource/products.json";
     private static final int BEGIN_VALUE = 0;
     private static final int OFFSET = 1;
     private static final int DEFAULT_INDEX = -1;
     private static final int NUMBER_FOR_CODE = 31;
-    private static final String EXCEPTION_DESCRIBE = "Out of bound container!";
+    private static final String EXCEPTION_DESCRIBE = "Out of bound stock!";
 
     private Product[] ambry;
     private int size;
 
     public ArrayStock() {
-        this.ambry = new JsonDeserializer<Product>(PRODUCTS_FILE_NAME).readArray(Product[].class);
+        this.ambry = new Product[0];
         this.size = this.ambry.length;
     }
 
     public ArrayStock(Product[] products) {
         this.ambry = Arrays.copyOf(products, products.length);
         this.size = products.length;
+    }
+
+    public Product[] toArray() {
+        return Arrays.copyOf(ambry, size);
     }
 
     public Product[] toArray(Product[] products) {
@@ -41,9 +41,9 @@ public class ArrayStock implements Stock {
         return products;
     }
 
-    private void belongRange(int index) throws IndexOutOfBoundsContainerException {
+    private void belongRange(int index) throws IndexOutOfBoundsStockException {
         if (index < 0 && index > size) {
-            throw new IndexOutOfBoundsContainerException(EXCEPTION_DESCRIBE);
+            throw new IndexOutOfBoundsStockException(EXCEPTION_DESCRIBE);
         }
     }
 
@@ -55,7 +55,7 @@ public class ArrayStock implements Stock {
         return indexOf(product) > DEFAULT_INDEX;
     }
 
-    public Product set(int index, Product newProduct) throws IndexOutOfBoundsContainerException {
+    public Product set(int index, Product newProduct) throws IndexOutOfBoundsStockException {
         belongRange(index);
         Product product = ambry[index];
         ambry[index] = newProduct;
@@ -86,16 +86,16 @@ public class ArrayStock implements Stock {
     }
 
     public int indexOf(Product product) {
-        int indexElement = DEFAULT_INDEX;
+        int indexProduct = DEFAULT_INDEX;
         for (int i = 0; i < size; i++) {
             if (ambry[i] == product) {
-                indexElement = i;
+                indexProduct = i;
             }
         }
-        return indexElement;
+        return indexProduct;
     }
 
-    private void delleteMain(int indexProduct) {
+    private void deleteMain(int indexProduct) {
         Product[] newAmbry = new Product[size - OFFSET];
         System.arraycopy(ambry, BEGIN_VALUE, newAmbry, BEGIN_VALUE, indexProduct);
         System.arraycopy(ambry, indexProduct + OFFSET, newAmbry, indexProduct,
@@ -108,16 +108,16 @@ public class ArrayStock implements Stock {
     public boolean delete(Product product) {
         int indexProduct = indexOf(product);
         if (indexProduct > DEFAULT_INDEX) {
-            delleteMain(indexProduct);
+            deleteMain(indexProduct);
             return true;
         }
         return false;
     }
 
-    public Product delete(int indexProduct) throws IndexOutOfBoundsContainerException {
+    public Product delete(int indexProduct) throws IndexOutOfBoundsStockException {
         belongRange(indexProduct);
         Product productDeleted = get(indexProduct);
-        delleteMain(indexProduct);
+        deleteMain(indexProduct);
         return productDeleted;
     }
 
@@ -128,14 +128,10 @@ public class ArrayStock implements Stock {
         size = BEGIN_VALUE;
     }
 
-    public Product get(int indexProduct) throws IndexOutOfBoundsContainerException {
+    public Product get(int indexProduct) throws IndexOutOfBoundsStockException {
         belongRange(indexProduct);
-        Product element = ambry[indexProduct];
-        return element;
-    }
-
-    public Product[] getAll() {
-        return ambry;
+        Product product = ambry[indexProduct];
+        return product;
     }
 
     @Override

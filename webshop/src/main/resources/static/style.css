@@ -1,5 +1,23 @@
+div.profile-component h3{
+    padding-top: 150px;
+}
+
+div.profile-component button{
+    margin-top: 50px;
+}
+
+div.buttonInHeader button{
+    margin-bottom: 20px;
+}
+
 div.card-columns {
     -webkit-column-gap: 50px;
     -webkit-column-count: 4;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    line-height: normal;
+    margin: 0;
+    transform:scale(2);
 }
 

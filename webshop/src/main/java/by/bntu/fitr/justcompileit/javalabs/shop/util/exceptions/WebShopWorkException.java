@@ -1,4 +1,4 @@
-package by.bntu.fitr.justcompileit.javalabs.shop.model.exceptions;
+package by.bntu.fitr.justcompileit.javalabs.shop.util.exceptions;
 
 public class WebShopWorkException extends Exception {
 

@@ -1,5 +1,8 @@
 package by.bntu.fitr.justcompileit.javalabs.shop.model.container;
 
+import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
+import by.bntu.fitr.justcompileit.javalabs.shop.util.exceptions.logic.IndexOutOfBoundsContainerException;
+
 import java.util.Arrays;
 
 public class StorageShop<T> implements Storable<T> {
@@ -37,9 +40,9 @@ public class StorageShop<T> implements Storable<T> {
         return array;
     }
 
-    private void belongRange(int index) {
+    private void belongRange(int index) throws IndexOutOfBoundsContainerException {
         if (index < BEGIN_VALUE && index > size) {
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsContainerException();
         }
     }
 
@@ -51,7 +54,7 @@ public class StorageShop<T> implements Storable<T> {
         return indexOf(element) > DEFAULT_INDEX;
     }
 
-    public T set(int index, T newElement) {
+    public T set(int index, T newElement) throws IndexOutOfBoundsContainerException {
         belongRange(index);
         Object element = repository[index];
         repository[index] = newElement;
@@ -92,31 +95,30 @@ public class StorageShop<T> implements Storable<T> {
         return indexElement;
     }
 
+
+    private void deleteMain(int indexElement) {
+        Object[] newRepository = new Object[size - OFFSET];
+        System.arraycopy(repository, BEGIN_VALUE, newRepository, BEGIN_VALUE, indexElement);
+        System.arraycopy(repository, indexElement + OFFSET, newRepository, indexElement,
+                size - indexElement - OFFSET);
+        repository = new Product[newRepository.length];
+        System.arraycopy(newRepository, BEGIN_VALUE, repository, BEGIN_VALUE, newRepository.length);
+        size = newRepository.length;
+    }
+
     public boolean delete(T element) {
         int indexElement = indexOf(element);
         if (indexElement > DEFAULT_INDEX) {
-            Object[] newRepository = new Object[size - OFFSET];
-            System.arraycopy(repository, BEGIN_VALUE, newRepository, BEGIN_VALUE, indexElement);
-            System.arraycopy(repository, indexElement + OFFSET, newRepository, indexElement,
-                    size - indexElement - OFFSET);
-            repository = new Object[newRepository.length];
-            System.arraycopy(newRepository, BEGIN_VALUE, repository, BEGIN_VALUE, newRepository.length);
-            size = newRepository.length;
+            deleteMain(indexElement);
             return true;
         }
         return false;
     }
 
-    public T delete(int indexElement) {
+    public T delete(int indexElement) throws IndexOutOfBoundsContainerException {
         belongRange(indexElement);
         T elementDeleted = get(indexElement);
-        Object[] newRepository = new Object[size - OFFSET];
-        System.arraycopy(repository, BEGIN_VALUE, newRepository, BEGIN_VALUE, indexElement);
-        System.arraycopy(repository, indexElement + OFFSET, newRepository, indexElement,
-                size - indexElement - OFFSET);
-        repository = new Object[newRepository.length];
-        System.arraycopy(newRepository, BEGIN_VALUE, repository, BEGIN_VALUE, newRepository.length);
-        size = newRepository.length;
+        deleteMain(indexElement);
         return elementDeleted;
     }
 
@@ -127,7 +129,7 @@ public class StorageShop<T> implements Storable<T> {
         size = BEGIN_VALUE;
     }
 
-    public T get(int indexElement) {
+    public T get(int indexElement) throws IndexOutOfBoundsContainerException {
         belongRange(indexElement);
         Object element = repository[indexElement];
         return (T) element;

@@ -1,4 +1,4 @@
-package by.bntu.fitr.justcompileit.javalabs.shop.util;
+package by.bntu.fitr.justcompileit.javalabs.shop.util.io;
 
 import java.lang.reflect.Type;
 
