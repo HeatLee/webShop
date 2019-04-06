@@ -2,12 +2,13 @@ package by.bntu.fitr.justcompileit.javalabs.shop.model.entity;
 
 import by.bntu.fitr.justcompileit.javalabs.shop.model.container.Stock;
 
+import java.util.Objects;
 import java.util.Set;
 
 public class User extends Human {
 
-    private static Long amount;
-    private Long id;
+    private static long amount;
+    private long id;
     private String username;
     private String password;
     private boolean active;
@@ -43,11 +44,11 @@ public class User extends Human {
         this.money = user.money;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -89,6 +90,25 @@ public class User extends Human {
 
     public void setMoney(double money) {
         this.money = money;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        User user = (User) o;
+        return id == user.id &&
+                active == user.active &&
+                Double.compare(user.money, money) == 0 &&
+                username.equals(user.username) &&
+                password.equals(user.password) &&
+                roles.equals(user.roles);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), id, username, password, active, roles, money);
     }
 
     @Override

@@ -32,7 +32,7 @@ public class UserArrayList implements UserList {
 
     public User[] toArray(User[] users) {
         if (users.length < count) {
-            return (User[]) Arrays.copyOf(list, count, users.getClass());
+            return Arrays.copyOf(list, count, users.getClass());
         }
         System.arraycopy(list, BEGIN_VALUE, users, BEGIN_VALUE, count);
         if (users.length > count) {
@@ -43,9 +43,14 @@ public class UserArrayList implements UserList {
 
     private void belongRange(int index) throws IndexOutOfBoundsUserListException {
         if (index < 0 && index > count) {
-            throw new IndexOutOfBoundsUserListException(EXCEPTION_DESCRIBE);
+            throw new IndexOutOfBoundsUserListException(outOfBoundsUserListMsg(index));
         }
     }
+
+    private String outOfBoundsUserListMsg(int index) {
+        return EXCEPTION_DESCRIBE + " Index: " + index + ", Count: " + count;
+    }
+
 
     public int count() {
         return count;
@@ -88,7 +93,7 @@ public class UserArrayList implements UserList {
     public int indexOf(User user) {
         int indexUser = DEFAULT_INDEX;
         for (int i = 0; i < count; i++) {
-            if (list[i] == user) {
+            if (list[i].equals(user)) {
                 indexUser = i;
             }
         }

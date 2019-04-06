@@ -4,6 +4,7 @@ import by.bntu.fitr.justcompileit.javalabs.shop.model.container.Stock;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Human;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
 import by.bntu.fitr.justcompileit.javalabs.shop.util.exceptions.logic.IndexOutOfBoundsStockException;
+
 import org.apache.log4j.Logger;
 
 public class ShopManager {
@@ -26,9 +27,8 @@ public class ShopManager {
             } catch (IndexOutOfBoundsStockException e) {
                 logger.error(e.getMessage());
             }
-
             if (product != null) {
-                totalAmount += product.getPrice();
+                totalAmount += product.getCost();
             }
         }
         return totalAmount;

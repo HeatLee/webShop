@@ -8,11 +8,11 @@ public interface Storable<T> {
 
     T[] toArray(T[] array);
 
-    int size();
-
-    boolean contains(T elemnt);
+    boolean contains(T element);
 
     T set(int index, T newElement) throws IndexOutOfBoundsContainerException;
+
+    int size();
 
     boolean add(T element);
 

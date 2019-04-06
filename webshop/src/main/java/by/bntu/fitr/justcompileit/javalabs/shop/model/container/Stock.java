@@ -19,13 +19,13 @@ public interface Stock {
 
     boolean addAll(Product[] products);
 
-    int indexOf(Product product);
+    void clear();
 
     boolean delete(Product product);
 
     Product delete(int index) throws IndexOutOfBoundsStockException;
 
-    void clear();
+    int indexOf(Product product);
 
     Product get(int index) throws IndexOutOfBoundsStockException;
 

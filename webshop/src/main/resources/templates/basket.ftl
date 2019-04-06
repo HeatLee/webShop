@@ -11,22 +11,19 @@
     </form>
 </div>
 <table class="table table-hover">
-<!--    <thead>-->
-<!--    <tr>-->
-<!--        <th width="150"></th>-->
-<!--        <th width="500"></th>-->
-<!--        <th width="50"></th>-->
-<!--    </tr>-->
-<!--    </thead>-->
     <tbody>
     <#list basketProducts as product>
         <tr>
             <td width="150" class="align-middle">
+                <a style="display: block;" href="/products/${product.id}">
                 <#if product.fileName??>
                     <img width="150" height="150" src="/img/${product.fileName}" alt="image fruct">
                 </#if>
+                </a>
             </td>
-            <td width="500" class="text-center align-middle">${product.name} - ${product.price} $</td>
+            <td width="500" class="text-center align-middle">
+                    ${product.productName} - ${product.cost} $
+            </td>
             <td width="50" class="align-middle">
                 <div class="text-center">
                     <input type="hidden" name="_csrf" value="${_csrf.token}"/>

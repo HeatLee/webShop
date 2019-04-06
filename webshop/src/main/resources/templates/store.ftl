@@ -10,7 +10,7 @@
             <img width="200" height="200" src="/img/${product.fileName}" class="card-img-top">
             </#if>
             </a></p>
-        <h5 class="card-title">${product.name} - ${product.price} $</h5>
+        <h5 class="card-title">${product.productName} - ${product.cost} $</h5>
     </div>
     <#else>
     No products

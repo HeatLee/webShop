@@ -41,12 +41,10 @@ public class UserActionController {
                               @PathVariable String productId, Model model) {
         User user = userService.findByUsername(userDetails.getUsername());
         Product productAdded = productService.findById(Long.parseLong(productId));
-        if (!user.getBasket().contains(productAdded)) {
-            user.getBasket().add(productAdded);
-            userService.update();
-        }
+        user.getBasket().add(productAdded);
+        userService.update();
         model.addAttribute("product", productAdded);
-        return "product_profile";
+        return "product_profile_in_basket";
     }
 
 }

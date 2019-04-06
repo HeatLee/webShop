@@ -1,1 +1,25 @@
-[{"id":1,"username":"Iohhanes","password":"123","active":true,"roles":["USER"],"money":0.0,"basket":{"ambry":[{"id":10,"price":10.0,"fileName":"plum.png","name":"plum"}],"size":1}}]
+[
+  {
+    "id": 1,
+    "username": "Iohhanes",
+    "password": "123",
+    "active": true,
+    "roles": [
+      "USER"
+    ],
+    "money": 0.0,
+    "basket": {
+      "ambry": [
+        {
+          "id": 2,
+          "cost": 10.0,
+          "weight": 1.7976931348623157E308,
+          "fileName": "apple.png",
+          "productName": "apple",
+          "countryProducer": "No country"
+        }
+      ],
+      "size": 1
+    }
+  }
+]

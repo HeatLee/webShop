@@ -22,8 +22,8 @@ public class ArrayStock implements Stock {
     }
 
     public ArrayStock(Product[] products) {
-        this.ambry = Arrays.copyOf(products, products.length);
-        this.size = products.length;
+        ambry = Arrays.copyOf(products, products.length);
+        size = products.length;
     }
 
     public Product[] toArray() {
@@ -32,7 +32,7 @@ public class ArrayStock implements Stock {
 
     public Product[] toArray(Product[] products) {
         if (products.length < size) {
-            return (Product[]) Arrays.copyOf(ambry, size, products.getClass());
+            return Arrays.copyOf(ambry, size, products.getClass());
         }
         System.arraycopy(ambry, BEGIN_VALUE, products, BEGIN_VALUE, size);
         if (products.length > size) {
@@ -43,9 +43,14 @@ public class ArrayStock implements Stock {
 
     private void belongRange(int index) throws IndexOutOfBoundsStockException {
         if (index < 0 && index > size) {
-            throw new IndexOutOfBoundsStockException(EXCEPTION_DESCRIBE);
+            throw new IndexOutOfBoundsStockException(outOfBoundsStockMsg(index));
         }
     }
+
+    private String outOfBoundsStockMsg(int index) {
+        return EXCEPTION_DESCRIBE + " Index: " + index + ", Size: " + size;
+    }
+
 
     public int size() {
         return size;
@@ -69,7 +74,7 @@ public class ArrayStock implements Stock {
             newAmbry[size] = product;
             ambry = new Product[newAmbry.length];
             System.arraycopy(newAmbry, BEGIN_VALUE, ambry, BEGIN_VALUE, newAmbry.length);
-            size = newAmbry.length;
+            size++;
             return true;
         }
         return false;
@@ -88,7 +93,7 @@ public class ArrayStock implements Stock {
     public int indexOf(Product product) {
         int indexProduct = DEFAULT_INDEX;
         for (int i = 0; i < size; i++) {
-            if (ambry[i] == product) {
+            if (ambry[i].equals(product)) {
                 indexProduct = i;
             }
         }
@@ -102,7 +107,7 @@ public class ArrayStock implements Stock {
                 size - indexProduct - OFFSET);
         ambry = new Product[newAmbry.length];
         System.arraycopy(newAmbry, BEGIN_VALUE, ambry, BEGIN_VALUE, newAmbry.length);
-        size = newAmbry.length;
+        size--;
     }
 
     public boolean delete(Product product) {
@@ -128,6 +133,7 @@ public class ArrayStock implements Stock {
         size = BEGIN_VALUE;
     }
 
+
     public Product get(int indexProduct) throws IndexOutOfBoundsStockException {
         belongRange(indexProduct);
         Product product = ambry[indexProduct];
@@ -138,9 +144,9 @@ public class ArrayStock implements Stock {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ArrayStock stock = (ArrayStock) o;
-        return size == stock.size &&
-                Arrays.equals(ambry, stock.ambry);
+        ArrayStock that = (ArrayStock) o;
+        return size == that.size &&
+                Arrays.equals(ambry, that.ambry);
     }
 
     @Override
@@ -157,6 +163,4 @@ public class ArrayStock implements Stock {
         return Arrays.toString(ambry);
     }
 
-
 }
-

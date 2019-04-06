@@ -7,17 +7,19 @@ import java.util.Arrays;
 
 public class StorageShop<T> implements Storable<T> {
 
-    private static final int BEGIN_VALUE = 0;
-    private static final int OFFSET = 1;
-    private static final int DEFAULT_INDEX = -1;
-    private static final int NUMBER_FOR_CODE = 31;
+    public static final String INDEX_OF_BOUND_EXCEPTION_DESCRIPTION = "Out of bound container!";
+
+    public static final int BEGIN_VALUE = 0;
+    public static final int OFFSET = 1;
+    public static final int DEFAULT_INDEX = -1;
+    public static final int HASH_NUM = 31;
 
     private Object[] repository;
     private int size;
 
     public StorageShop() {
-        this.repository = new Object[0];
-        this.size = 0;
+        repository = new Object[BEGIN_VALUE];
+        size = BEGIN_VALUE;
     }
 
     public StorageShop(T[] repository) {
@@ -34,16 +36,19 @@ public class StorageShop<T> implements Storable<T> {
             return (T[]) Arrays.copyOf(repository, size, array.getClass());
         }
         System.arraycopy(repository, BEGIN_VALUE, array, BEGIN_VALUE, size);
-        if (array.length > size) {
+        if (array.length > size)
             array[size] = null;
-        }
         return array;
     }
 
     private void belongRange(int index) throws IndexOutOfBoundsContainerException {
-        if (index < BEGIN_VALUE && index > size) {
-            throw new IndexOutOfBoundsContainerException();
+        if (index < BEGIN_VALUE || index > size || size==BEGIN_VALUE) {
+            throw new IndexOutOfBoundsContainerException(outOfBoundsMsg(index));
         }
+    }
+
+    private String outOfBoundsMsg(int index) {
+        return "Index: "+index+", Size: "+size;
     }
 
     public int size() {
@@ -68,14 +73,13 @@ public class StorageShop<T> implements Storable<T> {
             newRepository[size] = element;
             repository = new Object[newRepository.length];
             System.arraycopy(newRepository, BEGIN_VALUE, repository, BEGIN_VALUE, newRepository.length);
-            size = newRepository.length;
+            size++;
             return true;
         }
         return false;
     }
 
     public boolean addAll(T[] array) {
-        ;
         Object[] newRepository = new Object[size + array.length];
         System.arraycopy(repository, BEGIN_VALUE, newRepository, BEGIN_VALUE, size);
         System.arraycopy(array, BEGIN_VALUE, newRepository, size, array.length);
@@ -88,11 +92,18 @@ public class StorageShop<T> implements Storable<T> {
     public int indexOf(T element) {
         int indexElement = DEFAULT_INDEX;
         for (int i = 0; i < size; i++) {
-            if ((T) repository[i] == element) {
+            if (repository[i] == element) {
                 indexElement = i;
             }
         }
         return indexElement;
+    }
+
+    public void clear() {
+        for (int i = 0; i < size; i++) {
+            repository[i] = null;
+        }
+        size = BEGIN_VALUE;
     }
 
 
@@ -103,7 +114,7 @@ public class StorageShop<T> implements Storable<T> {
                 size - indexElement - OFFSET);
         repository = new Product[newRepository.length];
         System.arraycopy(newRepository, BEGIN_VALUE, repository, BEGIN_VALUE, newRepository.length);
-        size = newRepository.length;
+        size--;
     }
 
     public boolean delete(T element) {
@@ -120,13 +131,6 @@ public class StorageShop<T> implements Storable<T> {
         T elementDeleted = get(indexElement);
         deleteMain(indexElement);
         return elementDeleted;
-    }
-
-    public void clear() {
-        for (int i = 0; i < size; i++) {
-            repository[i] = null;
-        }
-        size = BEGIN_VALUE;
     }
 
     public T get(int indexElement) throws IndexOutOfBoundsContainerException {
@@ -147,7 +151,7 @@ public class StorageShop<T> implements Storable<T> {
     public int hashCode() {
         int result = OFFSET;
         for (T element : (T[]) repository) {
-            result = NUMBER_FOR_CODE * result + (element == null ? BEGIN_VALUE : element.hashCode());
+            result = HASH_NUM * result + (element == null ? BEGIN_VALUE : element.hashCode());
         }
         return result;
     }
@@ -156,6 +160,5 @@ public class StorageShop<T> implements Storable<T> {
     public String toString() {
         return Arrays.toString(repository);
     }
-
 
 }

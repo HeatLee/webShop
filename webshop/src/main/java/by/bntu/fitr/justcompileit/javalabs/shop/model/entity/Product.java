@@ -4,11 +4,21 @@ import java.util.Objects;
 
 public class Product {
 
-    private static Long amount;
-    private Long id;
-    private double price;
+    public static final double DEFAULT_PRODUCT_COST = Double.MAX_VALUE;
+    public static final double DEFAULT_PRODUCT_WEIGHT = Double.MAX_VALUE;
+
+    public static final String DEFAULT_PRODUCT_NAME = "No name";
+    public static final String DEFAULT_COUNTRY = "No country";
+
+    private static long amount;
+
+    private long id;
+    private double cost;
+    private double weight;
+
     private String fileName;
-    private String name;
+    private String productName;
+    private String countryProducer;
 
     static {
         amount = 1L;
@@ -19,34 +29,50 @@ public class Product {
     }
 
     public Product() {
+        cost = DEFAULT_PRODUCT_COST;
+        weight = DEFAULT_PRODUCT_WEIGHT;
+        productName = DEFAULT_PRODUCT_NAME;
+        countryProducer = DEFAULT_COUNTRY;
     }
 
-    public Product(double price, String fileName, String name) {
-        this.price = price;
+    public Product(String productName, String fileName, String countryProducer, double cost, double weight) {
+        this.cost = cost;
+        this.weight = weight;
+        this.productName = productName;
+        this.countryProducer = countryProducer;
         this.fileName = fileName;
-        this.name = name;
     }
 
     public Product(Product product) {
-        this.price = product.price;
+        this.cost = product.cost;
+        this.weight = product.weight;
+        this.productName = product.productName;
         this.fileName = product.fileName;
-        this.name = product.name;
+        this.countryProducer = product.countryProducer;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public double getPrice() {
-        return price;
+    public double getCost() {
+        return cost;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
     }
 
     public String getFileName() {
@@ -57,12 +83,20 @@ public class Product {
         this.fileName = fileName;
     }
 
-    public String getName() {
-        return name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getCountryProducer() {
+        return countryProducer;
+    }
+
+    public void setCountryProducer(String countryProducer) {
+        this.countryProducer = countryProducer;
     }
 
     @Override
@@ -70,17 +104,28 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Double.compare(product.price, price) == 0 &&
-                name.equals(product.name);
+        return id == product.id &&
+                Double.compare(product.cost, cost) == 0 &&
+                Double.compare(product.weight, weight) == 0 &&
+                fileName.equals(product.fileName) &&
+                productName.equals(product.productName) &&
+                countryProducer.equals(product.countryProducer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(price, name);
+        return Objects.hash(id, cost, weight, fileName, productName, countryProducer);
     }
 
     @Override
     public String toString() {
-        return "Product{" + "price = " + price + ", fileName = " + fileName + ", name = " + name + "}";
+        return "Product{" +
+                "id=" + id +
+                ", cost=" + cost +
+                ", weight=" + weight +
+                ", fileName='" + fileName + '\'' +
+                ", productName='" + productName + '\'' +
+                ", countryProducer='" + countryProducer + '\'' +
+                '}';
     }
 }
