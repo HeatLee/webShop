@@ -10,9 +10,10 @@ import java.util.Scanner;
 
 public class JsonSimpleDeserializer<T> implements SimpleDeserializer<T> {
 
+    public static final String ERROR_OPEN_FILE = " cannot opened!";
+    public static final String SUCCESSFULLY_READ_FILE = " successfully read.";
+
     private static final Logger log = Logger.getLogger(JsonSimpleDeserializer.class);
-    private static final String ERROR_OPEN_FILE = " cannot opened!";
-    private static final String SUCCESSFULY_READ_FILE = " successfuly read.";
 
     private String fileName;
 
@@ -31,7 +32,7 @@ public class JsonSimpleDeserializer<T> implements SimpleDeserializer<T> {
                 data.append(scanner.nextLine());
             }
             objects = new Gson().fromJson(data.toString(), type);
-            log.info(fileName + SUCCESSFULY_READ_FILE);
+            log.info(fileName + SUCCESSFULLY_READ_FILE);
 
         } catch (IOException e) {
             log.error(fileName + ERROR_OPEN_FILE);

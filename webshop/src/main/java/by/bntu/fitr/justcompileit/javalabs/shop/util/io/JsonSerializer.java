@@ -10,8 +10,8 @@ import java.io.IOException;
 @EnableAutoConfiguration
 public class JsonSerializer<T> implements Serializer<T> {
 
-    private static final String ERROR_OPEN_FILE = " cannot opened!";
-    private static final String SUCCESSFULLY_WRITE_FILE = " successfully is written.";
+    public static final String ERROR_OPEN_FILE = " cannot opened!";
+    public static final String SUCCESSFULLY_WRITE_FILE = " successfully is written.";
 
     private static final Logger log = Logger.getLogger(JsonSerializer.class);
 

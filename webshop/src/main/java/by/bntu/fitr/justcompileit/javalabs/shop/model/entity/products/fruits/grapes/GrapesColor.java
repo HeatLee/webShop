@@ -2,6 +2,6 @@ package by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.fruits.gr
 
 public enum GrapesColor {
 
-    DEFAULT_COLOR, RED, GREEN, VIOLET
+    RED, GREEN, VIOLET
 
 }

@@ -7,14 +7,14 @@ import org.springframework.stereotype.Service;
 @Service
 public interface ProductService {
 
-    boolean exists(Product product);
+    Stock getAll();
 
     boolean append(Product product);
+
+    boolean exists(Product product);
 
     boolean remove(Product product);
 
     Product findById(Long id);
-
-    Stock getAll();
 
 }

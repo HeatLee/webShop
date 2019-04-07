@@ -1,17 +1,20 @@
 package by.bntu.fitr.justcompileit.javalabs.shop.model.service;
 
+import by.bntu.fitr.justcompileit.javalabs.shop.model.container.ArrayStock;
+import by.bntu.fitr.justcompileit.javalabs.shop.model.container.Stock;
+import by.bntu.fitr.justcompileit.javalabs.shop.model.container.UserArrayList;
+import by.bntu.fitr.justcompileit.javalabs.shop.model.container.UserList;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.User;
 import by.bntu.fitr.justcompileit.javalabs.shop.util.io.JsonDeserializer;
 import by.bntu.fitr.justcompileit.javalabs.shop.util.io.JsonSerializer;
 import org.springframework.stereotype.Service;
-import by.bntu.fitr.justcompileit.javalabs.shop.model.container.*;
 
 import java.util.Objects;
 
 @Service
 public class UserServiceAccidence implements UserService {
 
-    private static final String USERS_FILE_NAME = "dataSource/users.json";
+    public static final String USERS_FILE_NAME = "dataSource/users.json";
 
     private UserList database;
 
@@ -33,7 +36,7 @@ public class UserServiceAccidence implements UserService {
     }
 
     public boolean exists(User user) {
-        return (findByUsername(user.getUsername()) == null) ? false : true;
+        return findByUsername(user.getUsername()) != null;
     }
 
     public User findByUsername(String username) {
@@ -95,5 +98,3 @@ public class UserServiceAccidence implements UserService {
         return info.toString();
     }
 }
-
-

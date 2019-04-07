@@ -8,8 +8,8 @@ import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.fruits.Pin
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.fruits.apple.Apple;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.fruits.banana.Banana;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.fruits.grapes.Grapes;
-import by.bntu.fitr.justcompileit.javalabs.shop.model.exceptions.logic.IndexOutOfBoundsContainerException;
-import by.bntu.fitr.justcompileit.javalabs.shop.model.exceptions.logic.WebShopWorkLogicException;
+import by.bntu.fitr.justcompileit.javalabs.shop.util.exceptions.logic.IndexOutOfBoundsStockException;
+import by.bntu.fitr.justcompileit.javalabs.shop.util.exceptions.logic.WebShopWorkLogicException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,7 +34,7 @@ public class ArrayStockZeroLengthTest {
 
         try {
             stock.get(numOfProduct);
-        } catch (IndexOutOfBoundsContainerException e) {
+        } catch (IndexOutOfBoundsStockException e) {
         }
     }
 
@@ -44,7 +44,7 @@ public class ArrayStockZeroLengthTest {
         try {
             stock.get(numOfProduct);
         } catch (WebShopWorkLogicException e) {
-            assertEquals(IndexOutOfBoundsContainerException.class, e.getClass());
+            assertEquals(IndexOutOfBoundsStockException.class, e.getClass());
         }
     }
 
@@ -54,13 +54,13 @@ public class ArrayStockZeroLengthTest {
         try {
             stock.get(numOfProduct);
         } catch (WebShopWorkLogicException e) {
-            assertEquals(IndexOutOfBoundsContainerException.class, e.getClass());
+            assertEquals(IndexOutOfBoundsStockException.class, e.getClass());
         }
     }
 
     @Test
     public void testGetAll() {
-        Product[] actual = stock.getAll();
+        Product[] actual = stock.toArray();
         Product[] expected = products;
 
         assertArrayEquals(actual, expected);
@@ -74,7 +74,7 @@ public class ArrayStockZeroLengthTest {
         expected[expected.length - 1] = testOrange;
 
         stock.add(testOrange);
-        assertArrayEquals(expected, stock.getAll());
+        assertArrayEquals(expected, stock.toArray());
     }
 
     @Test
@@ -102,7 +102,7 @@ public class ArrayStockZeroLengthTest {
 
         stock.addAll(new Product[]{testOrange, testBanana, testApple, testGrapes, testPineapple});
 
-        assertArrayEquals(expected, stock.getAll());
+        assertArrayEquals(expected, stock.toArray());
     }
 
     @Test(expected = NullPointerException.class)
@@ -111,8 +111,23 @@ public class ArrayStockZeroLengthTest {
     }
 
     @Test
-    public void testIsContainsBadResult() {
-        assertFalse(stock.isContains(new Pineapple()));
+    public void testAddZeroLength() {
+        assertFalse(stock.addAll(new Product[0]));
+    }
+
+    @Test
+    public void testAddAllZeroLength() {
+        int expectedSize = stock.size();
+
+        stock.addAll(new Product[0]);
+
+        assertEquals(expectedSize, stock.size());
+        assertArrayEquals(products, stock.toArray());
+    }
+
+    @Test
+    public void testContainsBadResult() {
+        assertFalse(stock.contains(new Pineapple()));
     }
 
     @Test
@@ -120,7 +135,7 @@ public class ArrayStockZeroLengthTest {
         int index = products.length - 2;
         try {
             stock.delete(index);
-        } catch (IndexOutOfBoundsContainerException e) {
+        } catch (IndexOutOfBoundsStockException e) {
         }
     }
 
@@ -131,7 +146,7 @@ public class ArrayStockZeroLengthTest {
         try {
             stock.delete(index);
         } catch (WebShopWorkLogicException e) {
-            assertEquals(IndexOutOfBoundsContainerException.class, e.getClass());
+            assertEquals(IndexOutOfBoundsStockException.class, e.getClass());
         }
     }
 
@@ -142,7 +157,7 @@ public class ArrayStockZeroLengthTest {
         try {
             stock.delete(index);
         } catch (WebShopWorkLogicException e) {
-            assertEquals(IndexOutOfBoundsContainerException.class, e.getClass());
+            assertEquals(IndexOutOfBoundsStockException.class, e.getClass());
         }
     }
 
@@ -163,7 +178,7 @@ public class ArrayStockZeroLengthTest {
     public void testClear() {
         stock.clear();
         assertEquals(0, stock.size());
-        assertArrayEquals(null, stock.getAll());
+        assertArrayEquals(new Product[ArrayStock.BEGIN_VALUE], stock.toArray());
     }
 
     @Test
@@ -196,7 +211,7 @@ public class ArrayStockZeroLengthTest {
 
         try {
             stock.set(index, banana);
-        } catch (IndexOutOfBoundsContainerException e) {
+        } catch (IndexOutOfBoundsStockException e) {
         }
     }
 
@@ -209,7 +224,7 @@ public class ArrayStockZeroLengthTest {
         try {
             stock.set(index, banana);
         } catch (WebShopWorkLogicException e) {
-            assertEquals(IndexOutOfBoundsContainerException.class, e.getClass());
+            assertEquals(IndexOutOfBoundsStockException.class, e.getClass());
         }
     }
 
@@ -222,18 +237,17 @@ public class ArrayStockZeroLengthTest {
         try {
             stock.set(index, banana);
         } catch (WebShopWorkLogicException e) {
-            assertEquals(IndexOutOfBoundsContainerException.class, e.getClass());
+            assertEquals(IndexOutOfBoundsStockException.class, e.getClass());
         }
     }
 
     @Test
     public void testToArray() {
-        fail();
+        assertArrayEquals(products, stock.toArray());
     }
 
     @Test
     public void equals() {
-        fail();
+        assertTrue(stock.equals(new ArrayStock(products)));
     }
-
 }

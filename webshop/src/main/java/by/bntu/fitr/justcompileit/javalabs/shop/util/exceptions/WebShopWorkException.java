@@ -9,4 +9,8 @@ public class WebShopWorkException extends Exception {
     public WebShopWorkException(String msg) {
         super(msg);
     }
+
+    public WebShopWorkException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

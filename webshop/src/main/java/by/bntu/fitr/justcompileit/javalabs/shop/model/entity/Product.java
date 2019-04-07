@@ -7,22 +7,21 @@ public class Product {
     public static final double DEFAULT_PRODUCT_COST = Double.MAX_VALUE;
     public static final double DEFAULT_PRODUCT_WEIGHT = Double.MAX_VALUE;
 
-    public static final String DEFAULT_PRODUCT_NAME = "No name";
     public static final String DEFAULT_COUNTRY = "No country";
+    public static final String DEFAULT_PRODUCT_NAME = "No name";
 
     private static long amount;
-
-    private long id;
-    private double cost;
-    private double weight;
-
-    private String fileName;
-    private String productName;
-    private String countryProducer;
 
     static {
         amount = 1L;
     }
+
+    private long id;
+    private double cost;
+    private double weight;
+    private String fileName;
+    private String productName;
+    private String countryProducer;
 
     {
         this.id = amount++;
@@ -107,9 +106,9 @@ public class Product {
         return id == product.id &&
                 Double.compare(product.cost, cost) == 0 &&
                 Double.compare(product.weight, weight) == 0 &&
-                fileName.equals(product.fileName) &&
-                productName.equals(product.productName) &&
-                countryProducer.equals(product.countryProducer);
+                Objects.equals(fileName, product.fileName) &&
+                Objects.equals(productName, product.productName) &&
+                Objects.equals(countryProducer, product.countryProducer);
     }
 
     @Override

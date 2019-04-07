@@ -5,13 +5,7 @@ import by.bntu.fitr.justcompileit.javalabs.shop.util.exceptions.logic.IndexOutOf
 
 public interface Stock {
 
-    Product[] toArray();
-
-    Product[] toArray(Product[] products);
-
-    int size();
-
-    boolean contains(Product product);
+    Product get(int index) throws IndexOutOfBoundsStockException;
 
     Product set(int index, Product newProduct) throws IndexOutOfBoundsStockException;
 
@@ -19,14 +13,20 @@ public interface Stock {
 
     boolean addAll(Product[] products);
 
-    void clear();
+    boolean contains(Product product);
 
-    boolean delete(Product product);
+    void clear();
 
     Product delete(int index) throws IndexOutOfBoundsStockException;
 
+    boolean delete(Product product);
+
+    int size();
+
     int indexOf(Product product);
 
-    Product get(int index) throws IndexOutOfBoundsStockException;
+    Product[] toArray();
+
+    Product[] toArray(Product[] products);
 
 }

@@ -1,10 +1,12 @@
 package by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.fruits;
 
-import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
+import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Fruit;
+import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Ripeness;
+import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Sweetness;
 
 import java.util.Objects;
 
-public class Pear extends Product {
+public class Pear extends Fruit {
 
     public static final double DEFAULT_PEAR_DIAMETER = 0.0;
 
@@ -15,8 +17,9 @@ public class Pear extends Product {
         diameter = DEFAULT_PEAR_DIAMETER;
     }
 
-    public Pear(String productName, String fileName, String countryProducer, double cost, double weight, double diameter) {
-        super(productName, fileName, countryProducer, cost, weight);
+    public Pear(String productName, String fileName, String countryProducer, double cost, double weight,
+                Ripeness ripeness, Sweetness sweetness, double diameter) {
+        super(productName, fileName, countryProducer, cost, weight, ripeness, sweetness);
         this.diameter = diameter;
     }
 

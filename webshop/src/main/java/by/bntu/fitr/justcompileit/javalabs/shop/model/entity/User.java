@@ -26,7 +26,7 @@ public class User extends Human {
     public User() {
     }
 
-    public User(double money, String username, String password, boolean active, Set<Role> roles, Stock basket) {
+    public User(String username, String password, boolean active, Set<Role> roles, double money, Stock basket) {
         super(basket);
         this.username = username;
         this.password = password;

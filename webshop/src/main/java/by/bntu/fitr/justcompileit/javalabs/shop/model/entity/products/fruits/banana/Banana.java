@@ -1,10 +1,12 @@
 package by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.fruits.banana;
 
-import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
+import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Fruit;
+import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Ripeness;
+import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Sweetness;
 
 import java.util.Objects;
 
-public class Banana extends Product {
+public class Banana extends Fruit {
 
     public static final double DEFAULT_BANANA_LENGTH = 0.0;
 
@@ -15,8 +17,9 @@ public class Banana extends Product {
         this.length = DEFAULT_BANANA_LENGTH;
     }
 
-    public Banana(String bananaName, String fileName, String countryProducer, double cost, double weight, double length) {
-        super(bananaName, fileName, countryProducer, cost, weight);
+    public Banana(String productName, String fileName, String countryProducer, double cost, double weight,
+                  Ripeness ripeness, Sweetness sweetness, double length) {
+        super(productName, fileName, countryProducer, cost, weight, ripeness, sweetness);
         this.length = length;
     }
 

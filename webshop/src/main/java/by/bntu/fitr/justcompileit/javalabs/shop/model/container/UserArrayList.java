@@ -7,18 +7,18 @@ import java.util.Arrays;
 
 public class UserArrayList implements UserList {
 
-    private static final int BEGIN_VALUE = 0;
-    private static final int OFFSET = 1;
-    private static final int DEFAULT_INDEX = -1;
-    private static final int NUMBER_FOR_CODE = 31;
-    private static final String EXCEPTION_DESCRIBE = "Out of bound UserList!";
+    public static final int OFFSET = 1;
+    public static final int HASH_NUM = 31;
+    public static final int DEFAULT_INDEX = -1;
+    public static final int BEGIN_VALUE = 0;
+
+    public static final String EXCEPTION_DESCRIPTION = "Out of bound UserList!";
 
     private User[] list;
     private int count;
 
     public UserArrayList() {
-        this.list = new User[0];
-        this.count = this.list.length;
+        this.list = new User[BEGIN_VALUE];
     }
 
     public UserArrayList(User[] users) {
@@ -26,38 +26,15 @@ public class UserArrayList implements UserList {
         this.count = users.length;
     }
 
-    public User[] toArray() {
-        return Arrays.copyOf(list, count);
+    public UserArrayList(UserArrayList userArrayList) {
+        this.list = new User[userArrayList.count];
+        System.arraycopy(userArrayList.list, BEGIN_VALUE, this.list, BEGIN_VALUE, userArrayList.count);
+        count = userArrayList.count;
     }
 
-    public User[] toArray(User[] users) {
-        if (users.length < count) {
-            return Arrays.copyOf(list, count, users.getClass());
-        }
-        System.arraycopy(list, BEGIN_VALUE, users, BEGIN_VALUE, count);
-        if (users.length > count) {
-            users[count] = null;
-        }
-        return users;
-    }
-
-    private void belongRange(int index) throws IndexOutOfBoundsUserListException {
-        if (index < 0 && index > count) {
-            throw new IndexOutOfBoundsUserListException(outOfBoundsUserListMsg(index));
-        }
-    }
-
-    private String outOfBoundsUserListMsg(int index) {
-        return EXCEPTION_DESCRIBE + " Index: " + index + ", Count: " + count;
-    }
-
-
-    public int count() {
-        return count;
-    }
-
-    public boolean contains(User user) {
-        return indexOf(user) > DEFAULT_INDEX;
+    public User get(int indexUser) throws IndexOutOfBoundsUserListException {
+        belongRange(indexUser);
+        return list[indexUser];
     }
 
     public User set(int index, User newUser) throws IndexOutOfBoundsUserListException {
@@ -90,14 +67,44 @@ public class UserArrayList implements UserList {
         return users.length != BEGIN_VALUE;
     }
 
-    public int indexOf(User user) {
-        int indexUser = DEFAULT_INDEX;
-        for (int i = 0; i < count; i++) {
-            if (list[i].equals(user)) {
-                indexUser = i;
-            }
+    public void belongRange(int index) throws IndexOutOfBoundsUserListException {
+        if (index < 0 && index > count) {
+            throw new IndexOutOfBoundsUserListException(EXCEPTION_DESCRIPTION + " Index: " + index + ", Count: " + count);
         }
-        return indexUser;
+        if (count == BEGIN_VALUE) {
+            throw new IndexOutOfBoundsUserListException(EXCEPTION_DESCRIPTION);
+        }
+    }
+
+    public void clear() {
+        for (int i = 0; i < count; i++) {
+            list[i] = null;
+        }
+        count = BEGIN_VALUE;
+    }
+
+    public int count() {
+        return count;
+    }
+
+    public boolean contains(User user) {
+        return indexOf(user) > DEFAULT_INDEX;
+    }
+
+    public User delete(int indexUser) throws IndexOutOfBoundsUserListException {
+        belongRange(indexUser);
+        User userDeleted = get(indexUser);
+        deleteMain(indexUser);
+        return userDeleted;
+    }
+
+    public boolean delete(User user) {
+        int indexUser = indexOf(user);
+        if (indexUser > DEFAULT_INDEX) {
+            deleteMain(indexUser);
+            return true;
+        }
+        return false;
     }
 
     private void deleteMain(int indexUser) {
@@ -110,33 +117,30 @@ public class UserArrayList implements UserList {
         count = newList.length;
     }
 
-    public boolean delete(User user) {
-        int indexUser = indexOf(user);
-        if (indexUser > DEFAULT_INDEX) {
-            deleteMain(indexUser);
-            return true;
-        }
-        return false;
-    }
-
-    public User delete(int indexUser) throws IndexOutOfBoundsUserListException {
-        belongRange(indexUser);
-        User userDeleted = get(indexUser);
-        deleteMain(indexUser);
-        return userDeleted;
-    }
-
-    public void clear() {
+    public int indexOf(User user) {
+        int indexUser = DEFAULT_INDEX;
         for (int i = 0; i < count; i++) {
-            list[i] = null;
+            if (list[i].equals(user)) {
+                indexUser = i;
+                break;
+            }
         }
-        count = BEGIN_VALUE;
+        return indexUser;
     }
 
-    public User get(int indexUser) throws IndexOutOfBoundsUserListException {
-        belongRange(indexUser);
-        User user = list[indexUser];
-        return user;
+    public User[] toArray() {
+        return Arrays.copyOf(list, count);
+    }
+
+    public User[] toArray(User[] users) {
+        if (users.length < count) {
+            return Arrays.copyOf(list, count, users.getClass());
+        }
+        System.arraycopy(list, BEGIN_VALUE, users, BEGIN_VALUE, count);
+        if (users.length > count) {
+            users[count] = null;
+        }
+        return users;
     }
 
     @Override
@@ -152,7 +156,7 @@ public class UserArrayList implements UserList {
     public int hashCode() {
         int result = OFFSET;
         for (User user : list) {
-            result = NUMBER_FOR_CODE * result + (user == null ? BEGIN_VALUE : user.hashCode());
+            result = HASH_NUM * result + (user == null ? BEGIN_VALUE : user.hashCode());
         }
         return result;
     }

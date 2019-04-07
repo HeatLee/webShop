@@ -1,20 +1,23 @@
 package by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.fruits.grapes;
 
-import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
+import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Fruit;
+import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Ripeness;
+import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Sweetness;
 
 import java.util.Objects;
 
-public class Grapes extends Product {
+public class Grapes extends Fruit {
 
     private GrapesColor grapesColor;
 
     public Grapes() {
         super();
-        grapesColor = GrapesColor.DEFAULT_COLOR;
+        grapesColor = GrapesColor.RED;
     }
 
-    public Grapes(String productName, String fileName, String countryProducer, double cost, double weight, GrapesColor grapesColor) {
-        super(productName, fileName, countryProducer, cost, weight);
+    public Grapes(String productName, String fileName, String countryProducer, double cost, double weight,
+                  Ripeness ripeness, Sweetness sweetness, GrapesColor grapesColor) {
+        super(productName, fileName, countryProducer, cost, weight, ripeness, sweetness);
         this.grapesColor = grapesColor;
     }
 

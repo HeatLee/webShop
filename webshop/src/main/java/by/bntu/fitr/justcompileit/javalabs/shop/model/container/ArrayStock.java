@@ -7,73 +7,50 @@ import java.util.Arrays;
 
 public class ArrayStock implements Stock {
 
-    private static final int BEGIN_VALUE = 0;
-    private static final int OFFSET = 1;
-    private static final int DEFAULT_INDEX = -1;
-    private static final int NUMBER_FOR_CODE = 31;
-    private static final String EXCEPTION_DESCRIBE = "Out of bound stock!";
+    public static final int OFFSET = 1;
+    public static final int HASH_NUM = 31;
+    public static final int BEGIN_VALUE = 0;
+    public static final int DEFAULT_INDEX = -1;
 
-    private Product[] ambry;
+    public static final String EXCEPTION_DESCRIPTION = "Out of bound stock!";
+
+    private Product[] stock;
     private int size;
 
     public ArrayStock() {
-        this.ambry = new Product[0];
-        this.size = this.ambry.length;
+        this.stock = new Product[BEGIN_VALUE];
     }
 
-    public ArrayStock(Product[] products) {
-        ambry = Arrays.copyOf(products, products.length);
+    public ArrayStock(Product... products) {
+        stock = Arrays.copyOf(products, products.length);
         size = products.length;
     }
 
-    public Product[] toArray() {
-        return Arrays.copyOf(ambry, size);
+    public ArrayStock(ArrayStock stock) {
+        this.stock = new Product[stock.size];
+        System.arraycopy(stock.stock, BEGIN_VALUE, this.stock, BEGIN_VALUE, stock.size);
+        size = stock.size;
     }
 
-    public Product[] toArray(Product[] products) {
-        if (products.length < size) {
-            return Arrays.copyOf(ambry, size, products.getClass());
-        }
-        System.arraycopy(ambry, BEGIN_VALUE, products, BEGIN_VALUE, size);
-        if (products.length > size) {
-            products[size] = null;
-        }
-        return products;
-    }
-
-    private void belongRange(int index) throws IndexOutOfBoundsStockException {
-        if (index < 0 && index > size) {
-            throw new IndexOutOfBoundsStockException(outOfBoundsStockMsg(index));
-        }
-    }
-
-    private String outOfBoundsStockMsg(int index) {
-        return EXCEPTION_DESCRIBE + " Index: " + index + ", Size: " + size;
-    }
-
-
-    public int size() {
-        return size;
-    }
-
-    public boolean contains(Product product) {
-        return indexOf(product) > DEFAULT_INDEX;
+    public Product get(int indexProduct) throws IndexOutOfBoundsStockException {
+        belongRange(indexProduct);
+        return stock[indexProduct];
     }
 
     public Product set(int index, Product newProduct) throws IndexOutOfBoundsStockException {
         belongRange(index);
-        Product product = ambry[index];
-        ambry[index] = newProduct;
+        Product product = stock[index];
+        stock[index] = newProduct;
         return product;
     }
 
     public boolean add(Product product) {
         if (product != null) {
-            Product[] newAmbry = new Product[size + OFFSET];
-            System.arraycopy(ambry, BEGIN_VALUE, newAmbry, BEGIN_VALUE, size);
-            newAmbry[size] = product;
-            ambry = new Product[newAmbry.length];
-            System.arraycopy(newAmbry, BEGIN_VALUE, ambry, BEGIN_VALUE, newAmbry.length);
+            Product[] newStock = new Product[size + OFFSET];
+            System.arraycopy(stock, BEGIN_VALUE, newStock, BEGIN_VALUE, size);
+            newStock[size] = product;
+            stock = new Product[newStock.length];
+            System.arraycopy(newStock, BEGIN_VALUE, stock, BEGIN_VALUE, newStock.length);
             size++;
             return true;
         }
@@ -81,33 +58,41 @@ public class ArrayStock implements Stock {
     }
 
     public boolean addAll(Product[] products) {
-        Product[] newAmbry = new Product[size + products.length];
-        System.arraycopy(ambry, BEGIN_VALUE, newAmbry, BEGIN_VALUE, size);
-        System.arraycopy(products, BEGIN_VALUE, newAmbry, size, products.length);
-        ambry = new Product[newAmbry.length];
-        System.arraycopy(newAmbry, BEGIN_VALUE, ambry, BEGIN_VALUE, newAmbry.length);
-        size = newAmbry.length;
+        Product[] newStock = new Product[size + products.length];
+        System.arraycopy(stock, BEGIN_VALUE, newStock, BEGIN_VALUE, size);
+        System.arraycopy(products, BEGIN_VALUE, newStock, size, products.length);
+        stock = new Product[newStock.length];
+        System.arraycopy(newStock, BEGIN_VALUE, stock, BEGIN_VALUE, newStock.length);
+        size = newStock.length;
         return products.length != BEGIN_VALUE;
     }
 
-    public int indexOf(Product product) {
-        int indexProduct = DEFAULT_INDEX;
-        for (int i = 0; i < size; i++) {
-            if (ambry[i].equals(product)) {
-                indexProduct = i;
-            }
+    private void belongRange(int index) throws IndexOutOfBoundsStockException {
+        if (index < BEGIN_VALUE || index > size) {
+            throw new IndexOutOfBoundsStockException(EXCEPTION_DESCRIPTION + " Index: " + index + ", Size: " + size);
         }
-        return indexProduct;
+        if (size == BEGIN_VALUE) {
+            throw new IndexOutOfBoundsStockException(EXCEPTION_DESCRIPTION);
+        }
     }
 
-    private void deleteMain(int indexProduct) {
-        Product[] newAmbry = new Product[size - OFFSET];
-        System.arraycopy(ambry, BEGIN_VALUE, newAmbry, BEGIN_VALUE, indexProduct);
-        System.arraycopy(ambry, indexProduct + OFFSET, newAmbry, indexProduct,
-                size - indexProduct - OFFSET);
-        ambry = new Product[newAmbry.length];
-        System.arraycopy(newAmbry, BEGIN_VALUE, ambry, BEGIN_VALUE, newAmbry.length);
-        size--;
+    public boolean contains(Product product) {
+        return indexOf(product) > DEFAULT_INDEX;
+    }
+
+    public void clear() {
+        for (int i = 0; i < size; i++) {
+            stock[i] = null;
+        }
+        stock = new Product[BEGIN_VALUE];
+        size = BEGIN_VALUE;
+    }
+
+    public Product delete(int indexProduct) throws IndexOutOfBoundsStockException {
+        belongRange(indexProduct);
+        Product productDeleted = get(indexProduct);
+        deleteMain(indexProduct);
+        return productDeleted;
     }
 
     public boolean delete(Product product) {
@@ -119,25 +104,55 @@ public class ArrayStock implements Stock {
         return false;
     }
 
-    public Product delete(int indexProduct) throws IndexOutOfBoundsStockException {
-        belongRange(indexProduct);
-        Product productDeleted = get(indexProduct);
-        deleteMain(indexProduct);
-        return productDeleted;
+    private void deleteMain(int indexProduct) {
+        Product[] newStock = new Product[size - OFFSET];
+        System.arraycopy(stock, BEGIN_VALUE, newStock, BEGIN_VALUE, indexProduct);
+        System.arraycopy(stock, indexProduct + OFFSET, newStock, indexProduct,
+                size - indexProduct - OFFSET);
+        stock = new Product[newStock.length];
+        System.arraycopy(newStock, BEGIN_VALUE, stock, BEGIN_VALUE, newStock.length);
+        size--;
     }
 
-    public void clear() {
-        for (int i = 0; i < size; i++) {
-            ambry[i] = null;
+    public int indexOf(Product product) {
+
+        int indexProduct = DEFAULT_INDEX;
+
+        if (product == null) {
+            for (int i = 0; i < size; i++) {
+                if (stock[i] == null) {
+                    indexProduct = i;
+                    break;
+                }
+            }
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (product.equals(stock[i])) {
+                    indexProduct = i;
+                    break;
+                }
+            }
         }
-        size = BEGIN_VALUE;
+        return indexProduct;
     }
 
+    public int size() {
+        return size;
+    }
 
-    public Product get(int indexProduct) throws IndexOutOfBoundsStockException {
-        belongRange(indexProduct);
-        Product product = ambry[indexProduct];
-        return product;
+    public Product[] toArray() {
+        return Arrays.copyOf(stock, size);
+    }
+
+    public Product[] toArray(Product[] products) {
+        if (products.length < size) {
+            return Arrays.copyOf(stock, size, products.getClass());
+        }
+        System.arraycopy(stock, BEGIN_VALUE, products, BEGIN_VALUE, size);
+        if (products.length > size) {
+            products[size] = null;
+        }
+        return products;
     }
 
     @Override
@@ -146,21 +161,21 @@ public class ArrayStock implements Stock {
         if (o == null || getClass() != o.getClass()) return false;
         ArrayStock that = (ArrayStock) o;
         return size == that.size &&
-                Arrays.equals(ambry, that.ambry);
+                Arrays.equals(stock, that.stock);
     }
 
     @Override
     public int hashCode() {
         int result = OFFSET;
-        for (Product product : ambry) {
-            result = NUMBER_FOR_CODE * result + (product == null ? BEGIN_VALUE : product.hashCode());
+        for (Product product : stock) {
+            result = HASH_NUM * result + (product == null ? BEGIN_VALUE : product.hashCode());
         }
         return result;
     }
 
     @Override
     public String toString() {
-        return Arrays.toString(ambry);
+        return Arrays.toString(stock);
     }
 
 }

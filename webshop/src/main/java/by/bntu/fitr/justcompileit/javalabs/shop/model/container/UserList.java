@@ -5,13 +5,7 @@ import by.bntu.fitr.justcompileit.javalabs.shop.util.exceptions.logic.IndexOutOf
 
 public interface UserList {
 
-    User[] toArray();
-
-    User[] toArray(User[] users);
-
-    int count();
-
-    boolean contains(User user);
+    User get(int index) throws IndexOutOfBoundsUserListException;
 
     User set(int index, User newUser) throws IndexOutOfBoundsUserListException;
 
@@ -19,13 +13,19 @@ public interface UserList {
 
     boolean addAll(User[] users);
 
-    int indexOf(User user);
+    int count();
+
+    void clear();
+
+    boolean contains(User user);
 
     boolean delete(User user);
 
     User delete(int index) throws IndexOutOfBoundsUserListException;
 
-    void clear();
+    int indexOf(User user);
 
-    User get(int index) throws IndexOutOfBoundsUserListException;
+    User[] toArray();
+
+    User[] toArray(User[] users);
 }

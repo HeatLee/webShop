@@ -1,10 +1,12 @@
 package by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.fruits;
 
-import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
+import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Fruit;
+import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Ripeness;
+import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Sweetness;
 
 import java.util.Objects;
 
-public class Orange extends Product {
+public class Orange extends Fruit {
 
     public static final double DEFAULT_DIAMETER_ORANGE = 0.0;
     public static final double DEFAULT_AMOUNT_OF_VITAMIN_C_OF_ORANGE = 0.0;
@@ -18,9 +20,9 @@ public class Orange extends Product {
         amountOfVitaminC = DEFAULT_AMOUNT_OF_VITAMIN_C_OF_ORANGE;
     }
 
-    public Orange(String orangeName, String imageName, String countryProducer, double cost, double weight, double diameter,
-                  double amountOfVitaminC) {
-        super(orangeName, imageName, countryProducer, cost, weight);
+    public Orange(String productName, String fileName, String countryProducer, double cost, double weight,
+                  Ripeness ripeness, Sweetness sweetness, double diameter, double amountOfVitaminC) {
+        super(productName, fileName, countryProducer, cost, weight, ripeness, sweetness);
         this.diameter = diameter;
         this.amountOfVitaminC = amountOfVitaminC;
     }

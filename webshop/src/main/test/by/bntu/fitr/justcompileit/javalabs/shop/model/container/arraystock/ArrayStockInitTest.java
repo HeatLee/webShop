@@ -23,9 +23,15 @@ public class ArrayStockInitTest {
         stock = new ArrayStock();
     }
 
-    @Test(expected = NullPointerException.class)
-    public void testStockNullInit() {
-        stock = new ArrayStock(null);
+    @Test()
+    public void testStockCopyConstructor() {
+        ArrayStock arrayStock = new ArrayStock();
+        stock = new ArrayStock(arrayStock);
+    }
+
+    @Test
+    public void testStockProductInit() {
+        stock = new ArrayStock(new Product(), new Product());
     }
 
     @Test
@@ -35,11 +41,9 @@ public class ArrayStockInitTest {
 
     @Test
     public void testStockNormalInit() {
-        stock = new ArrayStock(new Product[]{
-                new Orange(),
+        stock = new ArrayStock(new Orange(),
                 new Grapes(),
                 new Banana(),
-                new Pineapple()
-        });
+                new Pineapple());
     }
 }

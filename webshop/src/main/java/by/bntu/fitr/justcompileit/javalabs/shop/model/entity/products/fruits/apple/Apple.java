@@ -1,28 +1,35 @@
 package by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.fruits.apple;
 
-import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
+import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Fruit;
+import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Ripeness;
+import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Sweetness;
 
 import java.util.Objects;
 
-public class Apple extends Product {
+public class Apple extends Fruit {
 
     public static final double DEFAULT_DIAMETER_VALUE = 0.0;
 
     private double diameter;
+    private AppleColor appleColor;
 
     public Apple() {
         super();
-        this.diameter = DEFAULT_DIAMETER_VALUE;
+        diameter = DEFAULT_DIAMETER_VALUE;
+        appleColor = AppleColor.GREEN;
     }
 
-    public Apple(String appleName, String imageName, String countryProducer, double cost, double weight, int diameter) {
-        super(appleName, imageName, countryProducer, cost, weight);
+    public Apple(String productName, String fileName, String countryProducer, double cost, double weight,
+                 Ripeness ripeness, Sweetness sweetness, double diameter, AppleColor appleColor) {
+        super(productName, fileName, countryProducer, cost, weight, ripeness, sweetness);
         this.diameter = diameter;
+        this.appleColor = appleColor;
     }
 
     public Apple(Apple apple) {
         super(apple);
         this.diameter = apple.diameter;
+        this.appleColor = apple.appleColor;
     }
 
     public double getDiameter() {
@@ -33,24 +40,34 @@ public class Apple extends Product {
         this.diameter = diameter;
     }
 
+    public AppleColor getAppleColor() {
+        return appleColor;
+    }
+
+    public void setAppleColor(AppleColor appleColor) {
+        this.appleColor = appleColor;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Apple apple = (Apple) o;
-        return Double.compare(apple.diameter, diameter) == 0;
+        return Double.compare(apple.diameter, diameter) == 0 &&
+                appleColor == apple.appleColor;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), diameter);
+        return Objects.hash(super.hashCode(), diameter, appleColor);
     }
 
     @Override
     public String toString() {
         return "Apple{" +
                 "diameter=" + diameter +
+                ", appleColor=" + appleColor +
                 "} " + super.toString();
     }
 }

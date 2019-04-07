@@ -9,7 +9,7 @@
     ],
     "money": 0.0,
     "basket": {
-      "ambry": [
+      "stock": [
         {
           "id": 2,
           "cost": 10.0,
@@ -20,6 +20,37 @@
         }
       ],
       "size": 1
+    }
+  },
+  {
+    "id": 2,
+    "username": "l_sobolev",
+    "password": "qwerty",
+    "active": true,
+    "roles": [
+      "USER"
+    ],
+    "money": 0.0,
+    "basket": {
+      "stock": [
+        {
+          "id": 1,
+          "cost": 10.0,
+          "weight": 1.7976931348623157E308,
+          "fileName": "orange.png",
+          "productName": "orange",
+          "countryProducer": "No country"
+        },
+        {
+          "id": 2,
+          "cost": 10.0,
+          "weight": 1.7976931348623157E308,
+          "fileName": "apple.png",
+          "productName": "apple",
+          "countryProducer": "No country"
+        }
+      ],
+      "size": 2
     }
   }
 ]

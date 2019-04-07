@@ -12,7 +12,8 @@ import java.util.Objects;
 @Service
 public class ProductServiceAccidence implements ProductService {
 
-    private static final String PRODUCTS_FILE_NAME = "dataSource/products.json";
+    public static final String PRODUCT_COLLECTION = "ProductServiceAccidence serves products:\n";
+    public static final String PRODUCTS_FILE_NAME = "dataSource/products.json";
 
     private Stock stock;
 
@@ -28,12 +29,25 @@ public class ProductServiceAccidence implements ProductService {
         return stock;
     }
 
+    public Stock getAll() {
+        return getStock();
+    }
+
     public void setStock(Stock stock) {
         this.stock = stock;
     }
 
+    public boolean append(Product product) {
+        boolean result = false;
+        if (!exists(product) && stock.add(product)) {
+            new JsonSerializer<Product>(PRODUCTS_FILE_NAME).writeArray(stock.toArray());
+            result = true;
+        }
+        return false;
+    }
+
     public boolean exists(Product product) {
-        return (findById(product.getId()) == null) ? false : true;
+        return findById(product.getId()) != null;
     }
 
     public Product findById(Long id) {
@@ -47,15 +61,6 @@ public class ProductServiceAccidence implements ProductService {
         return product;
     }
 
-    public boolean append(Product product) {
-        boolean result = false;
-        if (!exists(product) && stock.add(product)) {
-            new JsonSerializer<Product>(PRODUCTS_FILE_NAME).writeArray(stock.toArray());
-            result = true;
-        }
-        return false;
-    }
-
     public boolean remove(Product product) {
         boolean result = false;
         if (exists(product) && stock.delete(product)) {
@@ -63,10 +68,6 @@ public class ProductServiceAccidence implements ProductService {
             result = true;
         }
         return false;
-    }
-
-    public Stock getAll() {
-        return getStock();
     }
 
     @Override
@@ -84,7 +85,7 @@ public class ProductServiceAccidence implements ProductService {
 
     @Override
     public String toString() {
-        StringBuilder info = new StringBuilder("ProductServiceAccidence serves products:\n");
+        StringBuilder info = new StringBuilder(PRODUCT_COLLECTION);
         for (Product product : stock.toArray()) {
             info.append(product).append("\n");
         }
