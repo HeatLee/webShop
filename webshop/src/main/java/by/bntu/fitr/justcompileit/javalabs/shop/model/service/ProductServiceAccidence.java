@@ -3,8 +3,10 @@ package by.bntu.fitr.justcompileit.javalabs.shop.model.service;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.container.ArrayStock;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.container.Stock;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
+import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Fruit;
+import by.bntu.fitr.justcompileit.javalabs.shop.util.ProductTypes;
+import by.bntu.fitr.justcompileit.javalabs.shop.util.io.JsonDeserializer;
 import by.bntu.fitr.justcompileit.javalabs.shop.util.io.JsonSerializer;
-import by.bntu.fitr.justcompileit.javalabs.shop.util.io.JsonSimpleDeserializer;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -18,7 +20,8 @@ public class ProductServiceAccidence implements ProductService {
     private Stock stock;
 
     public ProductServiceAccidence() {
-        stock = new ArrayStock(new JsonSimpleDeserializer<Product>(PRODUCTS_FILE_NAME).readArray(Product[].class));
+        stock = new ArrayStock(new JsonDeserializer<Product>(PRODUCTS_FILE_NAME).readArrayPolimorphicObjects(
+                Product[].class, Product.class, new ProductTypes().getProductTypes()));
     }
 
     public ProductServiceAccidence(Stock stock) {
@@ -29,27 +32,46 @@ public class ProductServiceAccidence implements ProductService {
         return stock;
     }
 
-    public Stock getAll() {
-        return getStock();
-    }
-
     public void setStock(Stock stock) {
         this.stock = stock;
     }
 
+    @Override
+    public Stock getAll() {
+        return getStock();
+    }
+
+    public Product[] getFruits() {
+        Stock fruits = new ArrayStock();
+        for (Product product : stock.toArray()) {
+            if (product instanceof Fruit) {
+                fruits.add(product);
+            }
+        }
+        return fruits.toArray();
+    }
+
+    private void update() {
+        new JsonSerializer<Product[]>(PRODUCTS_FILE_NAME).writePolymorphicObjects(stock.toArray(),
+                Product.class, new ProductTypes().getProductTypes());
+    }
+
+    @Override
     public boolean append(Product product) {
         boolean result = false;
         if (!exists(product) && stock.add(product)) {
-            new JsonSerializer<Product>(PRODUCTS_FILE_NAME).writeArray(stock.toArray());
+            update();
             result = true;
         }
         return false;
     }
 
+    @Override
     public boolean exists(Product product) {
         return findById(product.getId()) != null;
     }
 
+    @Override
     public Product findById(Long id) {
         Product product = null;
         for (Product productSearch : stock.toArray()) {
@@ -61,10 +83,11 @@ public class ProductServiceAccidence implements ProductService {
         return product;
     }
 
+    @Override
     public boolean remove(Product product) {
         boolean result = false;
         if (exists(product) && stock.delete(product)) {
-            new JsonSerializer<Product>(PRODUCTS_FILE_NAME).writeArray(stock.toArray());
+            update();
             result = true;
         }
         return false;

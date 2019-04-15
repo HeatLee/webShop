@@ -4,11 +4,14 @@ import by.bntu.fitr.justcompileit.javalabs.shop.model.container.ArrayStock;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.container.Stock;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.container.UserArrayList;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.container.UserList;
+import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.User;
+import by.bntu.fitr.justcompileit.javalabs.shop.util.ProductTypes;
 import by.bntu.fitr.justcompileit.javalabs.shop.util.io.JsonDeserializer;
 import by.bntu.fitr.justcompileit.javalabs.shop.util.io.JsonSerializer;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 @Service
@@ -19,8 +22,9 @@ public class UserServiceAccidence implements UserService {
     private UserList database;
 
     public UserServiceAccidence() {
-        this.database = new UserArrayList(
-                new JsonDeserializer<User>(USERS_FILE_NAME).readArray(User[].class, Stock.class, ArrayStock.class));
+        this.database = new UserArrayList(new JsonDeserializer<User>(USERS_FILE_NAME).readArrayNestedObjects(
+                User[].class, Stock.class, ArrayStock.class, Product.class,
+                new ProductTypes().getProductTypes()));
     }
 
     public UserServiceAccidence(UserList database) {
@@ -69,7 +73,8 @@ public class UserServiceAccidence implements UserService {
     }
 
     public void update() {
-        new JsonSerializer<User>(USERS_FILE_NAME).writeArray(database.toArray());
+        new JsonSerializer<User[]>(USERS_FILE_NAME).writePolymorphicObjects(
+                database.toArray(), Product.class, new ProductTypes().getProductTypes());
     }
 
     public UserList findAll() {

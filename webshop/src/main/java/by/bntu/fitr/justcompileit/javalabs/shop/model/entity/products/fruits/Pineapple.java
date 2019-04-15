@@ -52,8 +52,9 @@ public class Pineapple extends Fruit {
 
     @Override
     public String toString() {
-        return "Pineapple{" +
-                "diameter=" + diameter +
-                "} " + super.toString();
+        return "price per kilogram: " + super.getCost() + " $" +
+                "\nproducing country: " + super.getCountryProducer() +
+                "\naverage weight: " + super.getWeight() + " g" +
+                "\naverage diameter: " + diameter + " mm";
     }
 }

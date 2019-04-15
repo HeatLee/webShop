@@ -6,17 +6,22 @@
             <img width="400" height="400" src="/img/${product.fileName}" alt="image fruct" class="img-thumbnail">
         </#if>
     </div>
-    <div class="col-sm text-center">
+    <div class="col-sm">
         <div class="profile-component">
-            <h3>${product.productName} - ${product.cost} $</h3>
-            <#if isContains>
-            <a href="/basket">Go to basket</a>
-            <#else>
-            <form method="post">
-                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                <button class="btn btn-success" type="submit">Add to basket</button>
-            </form>
-        </#if>
+            <div class="text-center">
+                <h2>${product.productName}</h2>
+            </div>
+            <h3>${product.toString()}</h3>
+            <div class="text-center">
+                <#if isContains>
+                    <a href="/basket">Go to basket</a>
+                <#else>
+                <form method="post">
+                    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                    <button class="btn btn-success" type="submit">Add to basket</button>
+                </form>
+                </#if>
+            </div>
     </div>
 </div>
 </div>

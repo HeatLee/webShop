@@ -66,9 +66,10 @@ public class Orange extends Fruit {
 
     @Override
     public String toString() {
-        return "Orange{" +
-                "diameter=" + diameter +
-                ", amountOfVitaminC=" + amountOfVitaminC +
-                "} " + super.toString();
+        return "price per kilogram: " + super.getCost() + " $" +
+                "\nproducing country: " + super.getCountryProducer() +
+                "\nvitamin C: " + amountOfVitaminC + " %" +
+                "\naverage weight: " + super.getWeight() + " g" +
+                "\naverage diameter: " + diameter + " mm";
     }
 }

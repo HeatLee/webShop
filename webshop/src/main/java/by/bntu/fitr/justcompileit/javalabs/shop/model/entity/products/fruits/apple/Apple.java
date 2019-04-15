@@ -65,9 +65,10 @@ public class Apple extends Fruit {
 
     @Override
     public String toString() {
-        return "Apple{" +
-                "diameter=" + diameter +
-                ", appleColor=" + appleColor +
-                "} " + super.toString();
+        return "price per kilogram: " + super.getCost() + " $" +
+                "\nproducing country: " + super.getCountryProducer() +
+                "\ncolor: " + appleColor +
+                "\naverage weight: " + super.getWeight() + " g" +
+                "\naverage diameter: " + diameter + " mm";
     }
 }

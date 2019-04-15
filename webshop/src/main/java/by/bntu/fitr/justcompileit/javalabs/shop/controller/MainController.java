@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.Map;
 
 @Controller
@@ -32,10 +33,15 @@ public class MainController {
         return "greeting";
     }
 
-    @GetMapping("/store")
+    @GetMapping("/fruits")
     public String showStoreShop(Model model) {
-        model.addAttribute("products", productService.getAll().toArray());
-        return "store";
+        model.addAttribute("products", productService.getFruits());
+        return "fruits";
+    }
+
+    @GetMapping("/vegetables")
+    public String showVegetables(Model model) {
+        return "vegetables";
     }
 
     @RequestMapping(value = "/products/{productId}")

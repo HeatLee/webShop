@@ -1,5 +1,9 @@
+div.store-navbar ul{
+    margin-bottom: 50px;
+}
 div.profile-component h3{
-    padding-top: 150px;
+    padding-top: 50px;
+    white-space: pre-line;
 }
 
 div.profile-component button{

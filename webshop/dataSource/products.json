@@ -1,74 +1,52 @@
 [
   {
+    "type": "Orange",
+    "diameter": 65.0,
+    "amountOfVitaminC": 6.0E-4,
+    "ripeness": "RIPE",
+    "sweetness": "SOUR",
     "id": 1,
-    "cost": 10,
+    "cost": 0.21,
+    "weight": 100.0,
     "fileName": "orange.png",
-    "productName": "orange"
+    "productName": "Orange",
+    "countryProducer": "Brasil"
   },
   {
+    "type": "Pear",
+    "diameter": 50.0,
+    "ripeness": "RIPE",
+    "sweetness": "SWEETNESS",
     "id": 2,
-    "cost": 10,
-    "fileName": "apple.png",
-    "productName": "apple"
-  },
-  {
-    "id": 3,
-    "cost": 10,
-    "fileName": "banan.png",
-    "productName": "banan"
-  },
-  {
-    "id": 4,
-    "cost": 10,
-    "fileName": "pineapple.png",
-    "productName": "pineapple"
-  },
-  {
-    "id": 5,
-    "cost": 10,
+    "cost": 0.4,
+    "weight": 85.0,
     "fileName": "pear.png",
-    "productName": "pear"
+    "productName": "Pear",
+    "countryProducer": "China"
   },
   {
-    "id": 6,
-    "cost": 10,
-    "fileName": "grapes.png",
-    "productName": "grapes"
+    "type": "Pineapple",
+    "diameter": 250.0,
+    "ripeness": "RIPE",
+    "sweetness": "SWEET_AND_SOUR",
+    "id": 3,
+    "cost": 2.0,
+    "weight": 1000.0,
+    "fileName": "pineapple.png",
+    "productName": "Pineapple",
+    "countryProducer": "Costa Rica"
   },
   {
-    "id": 7,
-    "cost": 10,
-    "fileName": "passion_fruit.png",
-    "productName": "passion fruit"
-  },
-  {
-    "id": 8,
-    "cost": 10,
-    "fileName": "pomelo.png",
-    "productName": "pomelo"
-  },
-  {
-    "id": 9,
-    "cost": 10,
-    "fileName": "mandarin.png",
-    "productName": "mandarin"
-  },
-  {
-    "id": 10,
-    "cost": 10,
-    "fileName": "plum.png",
-    "productName": "plum"
-  },
-  {
-    "id": 11,
-    "cost": 10,
-    "fileName": "mango.png",
-    "productName": "mango"
-  },
-  {
-    "id": 12,
-    "cost": 10,
-    "fileName": "kiwi.png",
-    "productName": "kiwi"
+    "type": "Apple",
+    "diameter": 65.0,
+    "appleColor": "GREEN",
+    "ripeness": "RIPE",
+    "sweetness": "SWEETNESS",
+    "id": 4,
+    "cost": 0.16,
+    "weight": 100.0,
+    "fileName": "apple.png",
+    "productName": "Apple",
+    "countryProducer": "China"
   }
 ]

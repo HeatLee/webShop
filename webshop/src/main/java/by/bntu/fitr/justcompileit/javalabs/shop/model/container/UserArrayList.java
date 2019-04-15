@@ -19,6 +19,7 @@ public class UserArrayList implements UserList {
 
     public UserArrayList() {
         this.list = new User[BEGIN_VALUE];
+        this.count = BEGIN_VALUE;
     }
 
     public UserArrayList(User[] users) {
