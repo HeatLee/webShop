@@ -7,8 +7,7 @@ public interface Deserializer<T> {
     T[] readArraySimpleObjects(Class<T[]> mainClass);
 
     T[] readArrayNestedObjects(Class<T[]> mainClass, Class interfaceName, Class interfaceImplName,
-                               Class parent, List<Class> hiers);
+                               Class parent, List<Class> heirs);
 
-    T[] readArrayPolimorphicObjects(Class<T[]> mainClass, Class parent, List<Class> hiers);
-
+    T[] readArrayPolymorphicObjects(Class<T[]> mainClass, Class parent, List<Class> heirs);
 }

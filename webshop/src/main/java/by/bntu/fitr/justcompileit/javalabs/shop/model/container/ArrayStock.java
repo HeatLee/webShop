@@ -115,7 +115,6 @@ public class ArrayStock implements Stock {
     }
 
     public int indexOf(Product product) {
-
         int indexProduct = DEFAULT_INDEX;
 
         if (product == null) {

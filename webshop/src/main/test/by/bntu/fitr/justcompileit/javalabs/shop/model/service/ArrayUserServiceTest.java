@@ -67,47 +67,45 @@ public class ArrayUserServiceTest {
         assertFalse(userArrayList.add(null));
     }
 
-//    @Test
-//    public void testRemove() {
-//        int index = 1;
-//        String testUserName = users[index].getUsername();
-//
-//        User[] expected = new User[users.length - 1];
-//        System.arraycopy(users, 0, expected, 0, index);
-//        System.arraycopy(users, index + 1, expected, index, users.length - index - 1);
-//        assertEquals(users[index], userArrayList.delete(testUserName));
-//
-//        assertArrayEquals(expected, userArrayList.getAll());
-//    }
-//
-//    @Test
-//    public void testRemoveNonexistentUser() {
-//        String testUserName = new User("test4", "test4", true, EnumSet.of(Role.USER), 3000, new ArrayStock()).getUsername();
-//
-//        assertNull(userArrayList.remove(testUserName));
-//    }
-//
-//    @Test
-//    public void findByUsername() {
-//        int index = 1;
-//        User expected = users[index];
-//        String testUserName = users[index].getUsername();
-//
-//        User actual = userArrayList.findByUsername(testUserName);
-//
-//        assertEquals(expected, actual);
-//    }
-//
-//    @Test
-//    public void findByNonexistentUsername() {
-//        String testUserName = "nonexistentUserName";
-//        User actual = userArrayList.findByUsername(testUserName);
-//
-//        assertNull(actual);
-//    }
-//
-//    @Test
-//    public void equals() {
-//        fail();
-//    }
+    @Test
+    public void testDelete() {
+        int index = 1;
+        User testUserName = users[index];
+
+        User[] expected = new User[users.length - 1];
+        System.arraycopy(users, 0, expected, 0, index);
+        System.arraycopy(users, index + 1, expected, index, users.length - index - 1);
+        userArrayList.delete(testUserName);
+        assertArrayEquals(expected, userArrayList.toArray());
+    }
+
+    @Test
+    public void testDeleteNonexistentUser() {
+        User testUserName = new User("test4", "test4", true, EnumSet.of(Role.USER), 3000, new ArrayStock());
+
+        assertFalse(userArrayList.delete(testUserName));
+    }
+
+    @Test
+    public void testIndexOf() {
+        int index = 1;
+        User expected = users[index];
+
+        int actualIndex = userArrayList.indexOf(expected);
+
+        assertEquals(index, actualIndex);
+    }
+
+    @Test
+    public void findByNonexistentUsername() {
+        User testUser = new User();
+        int actualIndex = userArrayList.indexOf(testUser);
+
+        assertEquals(ArrayStock.DEFAULT_INDEX, actualIndex);
+    }
+
+    @Test
+    public void equals() {
+        assertTrue(userArrayList.equals(new UserArrayList(users)));
+    }
 }

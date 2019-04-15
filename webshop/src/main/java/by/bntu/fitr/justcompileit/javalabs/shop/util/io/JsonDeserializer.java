@@ -31,17 +31,17 @@ public class JsonDeserializer<T> implements Deserializer<T> {
 
     @Override
     public T[] readArrayNestedObjects(Class<T[]> mainClass, Class interfaceName, Class interfaceImplName,
-                                      Class parent, List<Class> hiers) {
+                                      Class parent, List<Class> heirs) {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(interfaceName, new DeserializerAdapter(interfaceImplName));
-        gsonBuilder.registerTypeAdapterFactory(formRuntimeTypeAdapterFactory(parent, hiers));
+        gsonBuilder.registerTypeAdapterFactory(formRuntimeTypeAdapterFactory(parent, heirs));
         return readArray(mainClass, gsonBuilder.create());
     }
 
     @Override
-    public T[] readArrayPolimorphicObjects(Class<T[]> mainClass, Class parent, List<Class> hiers) {
+    public T[] readArrayPolymorphicObjects(Class<T[]> mainClass, Class parent, List<Class> heirs) {
         GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapterFactory(formRuntimeTypeAdapterFactory(parent, hiers));
+        gsonBuilder.registerTypeAdapterFactory(formRuntimeTypeAdapterFactory(parent, heirs));
         return readArray(mainClass, gsonBuilder.create());
     }
 
@@ -61,10 +61,10 @@ public class JsonDeserializer<T> implements Deserializer<T> {
         return objects;
     }
 
-    private RuntimeTypeAdapterFactory<?> formRuntimeTypeAdapterFactory(Class parent, List<Class> hiers) {
+    private RuntimeTypeAdapterFactory<?> formRuntimeTypeAdapterFactory(Class parent, List<Class> heirs) {
         RuntimeTypeAdapterFactory<?> runtimeTypeAdapterFactory = RuntimeTypeAdapterFactory.of(parent);
-        for (Class hier : hiers) {
-            runtimeTypeAdapterFactory.registerSubtype(hier);
+        for (Class heir : heirs) {
+            runtimeTypeAdapterFactory.registerSubtype(heir);
         }
         return runtimeTypeAdapterFactory;
     }

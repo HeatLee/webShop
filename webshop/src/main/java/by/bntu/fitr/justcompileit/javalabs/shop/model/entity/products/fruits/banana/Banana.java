@@ -33,7 +33,9 @@ public class Banana extends Fruit {
     }
 
     public void setLength(double length) {
-        this.length = length;
+        if (length > DEFAULT_BANANA_LENGTH) {
+            this.length = length;
+        }
     }
 
     @Override

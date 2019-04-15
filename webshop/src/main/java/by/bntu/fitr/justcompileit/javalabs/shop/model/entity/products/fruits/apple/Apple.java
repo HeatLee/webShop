@@ -37,7 +37,9 @@ public class Apple extends Fruit {
     }
 
     public void setDiameter(double diameter) {
-        this.diameter = diameter;
+        if (diameter > DEFAULT_DIAMETER_VALUE) {
+            this.diameter = diameter;
+        }
     }
 
     public AppleColor getAppleColor() {

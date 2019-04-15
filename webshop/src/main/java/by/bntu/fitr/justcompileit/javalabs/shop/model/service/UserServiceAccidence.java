@@ -11,7 +11,6 @@ import by.bntu.fitr.justcompileit.javalabs.shop.util.io.JsonDeserializer;
 import by.bntu.fitr.justcompileit.javalabs.shop.util.io.JsonSerializer;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 @Service

@@ -1,1 +1,42 @@
-[{"id":1,"username":"Iohhanes","password":"123","active":true,"roles":["USER"],"money":0.0,"basket":{"stock":[{"type":"Pear","diameter":50.0,"ripeness":"RIPE","sweetness":"SWEETNESS","id":2,"cost":0.4,"weight":85.0,"fileName":"pear.png","productName":"pear","countryProducer":"China"},{"type":"Orange","diameter":65.0,"amountOfVitaminC":6.0E-4,"ripeness":"RIPE","sweetness":"SOUR","id":1,"cost":0.21,"weight":100.0,"fileName":"orange.png","productName":"Orange","countryProducer":"Brasil"}],"size":2}}]
+[
+  {
+    "id": 1,
+    "username": "Iohhanes",
+    "password": "123",
+    "active": true,
+    "roles": [
+      "USER"
+    ],
+    "money": 0.0,
+    "basket": {
+      "stock": [
+        {
+          "type": "Pear",
+          "diameter": 50.0,
+          "ripeness": "RIPE",
+          "sweetness": "SWEETNESS",
+          "id": 2,
+          "cost": 0.4,
+          "weight": 85.0,
+          "fileName": "pear.png",
+          "productName": "pear",
+          "countryProducer": "China"
+        },
+        {
+          "type": "Orange",
+          "diameter": 65.0,
+          "amountOfVitaminC": 6.0E-4,
+          "ripeness": "RIPE",
+          "sweetness": "SOUR",
+          "id": 1,
+          "cost": 0.21,
+          "weight": 100.0,
+          "fileName": "orange.png",
+          "productName": "Orange",
+          "countryProducer": "Brazil"
+        }
+      ],
+      "size": 2
+    }
+  }
+]

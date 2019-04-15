@@ -20,7 +20,7 @@ public class ProductServiceAccidence implements ProductService {
     private Stock stock;
 
     public ProductServiceAccidence() {
-        stock = new ArrayStock(new JsonDeserializer<Product>(PRODUCTS_FILE_NAME).readArrayPolimorphicObjects(
+        stock = new ArrayStock(new JsonDeserializer<Product>(PRODUCTS_FILE_NAME).readArrayPolymorphicObjects(
                 Product[].class, Product.class, new ProductTypes().getProductTypes()));
     }
 
@@ -56,7 +56,6 @@ public class ProductServiceAccidence implements ProductService {
                 Product.class, new ProductTypes().getProductTypes());
     }
 
-    @Override
     public boolean append(Product product) {
         boolean result = false;
         if (!exists(product) && stock.add(product)) {
@@ -90,7 +89,7 @@ public class ProductServiceAccidence implements ProductService {
             update();
             result = true;
         }
-        return false;
+        return result;
     }
 
     @Override

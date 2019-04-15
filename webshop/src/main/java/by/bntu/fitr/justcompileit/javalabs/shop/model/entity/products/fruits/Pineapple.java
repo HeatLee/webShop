@@ -33,7 +33,9 @@ public class Pineapple extends Fruit {
     }
 
     public void setDiameter(double diameter) {
-        this.diameter = diameter;
+        if (diameter > DEFAULT_PEAR_DIAMETER) {
+            this.diameter = diameter;
+        }
     }
 
     @Override
