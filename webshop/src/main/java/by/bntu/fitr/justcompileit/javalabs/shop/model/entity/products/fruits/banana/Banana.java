@@ -54,8 +54,9 @@ public class Banana extends Fruit {
 
     @Override
     public String toString() {
-        return "Banana{" +
-                "length=" + length +
-                "} " + super.toString();
+        return "price per kilogram: " + super.getCost() + " $" +
+                "\nproducing country: " + super.getCountryProducer() +
+                "\nlength: " + length + "mm" +
+                "\naverage weight: " + super.getWeight() + " g";
     }
 }
