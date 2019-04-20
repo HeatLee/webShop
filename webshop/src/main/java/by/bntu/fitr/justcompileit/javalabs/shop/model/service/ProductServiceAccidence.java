@@ -3,8 +3,9 @@ package by.bntu.fitr.justcompileit.javalabs.shop.model.service;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.container.ArrayStock;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.container.Stock;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
+import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.ShopType;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Fruit;
-import by.bntu.fitr.justcompileit.javalabs.shop.util.ProductTypes;
+import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Vegetable;
 import by.bntu.fitr.justcompileit.javalabs.shop.util.io.JsonDeserializer;
 import by.bntu.fitr.justcompileit.javalabs.shop.util.io.JsonSerializer;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class ProductServiceAccidence implements ProductService {
     private Stock stock;
 
     public ProductServiceAccidence() {
-        stock = new ArrayStock(new JsonDeserializer<Product>(PRODUCTS_FILE_NAME).readArrayPolimorphicObjects(
-                Product[].class, Product.class, new ProductTypes().getProductTypes()));
+        stock = new ArrayStock(new JsonDeserializer<Product>(PRODUCTS_FILE_NAME).readArrayPolymorphicObjects(
+                Product[].class, Product.class, ShopType.PRODUCT.getTypes()));
     }
 
     public ProductServiceAccidence(Stock stock) {
@@ -41,6 +42,7 @@ public class ProductServiceAccidence implements ProductService {
         return getStock();
     }
 
+    @Override
     public Product[] getFruits() {
         Stock fruits = new ArrayStock();
         for (Product product : stock.toArray()) {
@@ -51,9 +53,20 @@ public class ProductServiceAccidence implements ProductService {
         return fruits.toArray();
     }
 
+    @Override
+    public Product[] getVegetables() {
+        Stock vegetables = new ArrayStock();
+        for (Product product : stock.toArray()) {
+            if (product instanceof Vegetable) {
+                vegetables.add(product);
+            }
+        }
+        return  vegetables.toArray();
+    }
+
     private void update() {
         new JsonSerializer<Product[]>(PRODUCTS_FILE_NAME).writePolymorphicObjects(stock.toArray(),
-                Product.class, new ProductTypes().getProductTypes());
+                Product.class, ShopType.PRODUCT.getTypes());
     }
 
     @Override

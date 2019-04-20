@@ -4,8 +4,9 @@ import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
 import by.bntu.fitr.justcompileit.javalabs.shop.util.exceptions.logic.IndexOutOfBoundsContainerException;
 
 import java.util.Arrays;
+import java.util.Collection;
 
-public class StorageShop<T> implements Storable<T> {
+public class StorageShop<T> implements Storable<T>{
 
     public static final String INDEX_OF_BOUND_EXCEPTION_DESCRIPTION = "Out of bound container!";
 

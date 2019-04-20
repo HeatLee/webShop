@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.List;
 import java.util.Scanner;
 
 public class JsonDeserializer<T> implements Deserializer<T> {
@@ -31,17 +30,17 @@ public class JsonDeserializer<T> implements Deserializer<T> {
 
     @Override
     public T[] readArrayNestedObjects(Class<T[]> mainClass, Class interfaceName, Class interfaceImplName,
-                                      Class parent, List<Class> hiers) {
+                                      Class parent, Class[] heirs) {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(interfaceName, new DeserializerAdapter(interfaceImplName));
-        gsonBuilder.registerTypeAdapterFactory(formRuntimeTypeAdapterFactory(parent, hiers));
+        gsonBuilder.registerTypeAdapterFactory(formRuntimeTypeAdapterFactory(parent, heirs));
         return readArray(mainClass, gsonBuilder.create());
     }
 
     @Override
-    public T[] readArrayPolimorphicObjects(Class<T[]> mainClass, Class parent, List<Class> hiers) {
+    public T[] readArrayPolymorphicObjects(Class<T[]> mainClass, Class parent, Class[] heirs) {
         GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapterFactory(formRuntimeTypeAdapterFactory(parent, hiers));
+        gsonBuilder.registerTypeAdapterFactory(formRuntimeTypeAdapterFactory(parent, heirs));
         return readArray(mainClass, gsonBuilder.create());
     }
 
@@ -61,9 +60,9 @@ public class JsonDeserializer<T> implements Deserializer<T> {
         return objects;
     }
 
-    private RuntimeTypeAdapterFactory<?> formRuntimeTypeAdapterFactory(Class parent, List<Class> hiers) {
+    private RuntimeTypeAdapterFactory<?> formRuntimeTypeAdapterFactory(Class parent, Class[] heirs) {
         RuntimeTypeAdapterFactory<?> runtimeTypeAdapterFactory = RuntimeTypeAdapterFactory.of(parent);
-        for (Class hier : hiers) {
+        for (Class hier : heirs) {
             runtimeTypeAdapterFactory.registerSubtype(hier);
         }
         return runtimeTypeAdapterFactory;

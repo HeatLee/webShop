@@ -19,6 +19,11 @@
             <li class="nav-item ">
                 <a class="nav-link" href="/basket">Basket<span class="sr-only">(current)</span></a>
             </li>
+            <#if user??>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/user_profile">Profile<span class="sr-only">(current)</span></a>
+                </li>
+            </#if>
         </ul>
         <div class="navbar-text mr-3">${name}</div>
         <div>

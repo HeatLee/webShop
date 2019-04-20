@@ -10,9 +10,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class UserActionController {
@@ -45,6 +43,34 @@ public class UserActionController {
         userService.update();
         model.addAttribute("product", productAdded);
         return "product_profile_in_basket";
+    }
+
+    @PostMapping("/basket")
+    public String buyProducts(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        User user = userService.findByUsername(userDetails.getUsername());
+        boolean buyResult = ShopManager.buyPurchase(user);
+        userService.update();
+        model.addAttribute("basketProducts", user.getBasket().toArray());
+        model.addAttribute("totalPrice", ShopManager.calculateTotalAmount(user));
+        model.addAttribute("buyResult", buyResult);
+        return "basket";
+    }
+
+    @GetMapping("/user_profile")
+    public String showUserProfile(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        User user = userService.findByUsername(userDetails.getUsername());
+        model.addAttribute("user", user);
+        return "user_profile";
+    }
+
+    @PostMapping("/user_profile")
+    public String replenishMoney(@AuthenticationPrincipal UserDetails userDetails, @RequestParam double money,
+                                 Model model) {
+        User user = userService.findByUsername(userDetails.getUsername());
+        user.setMoney(user.getMoney() + money);
+        userService.update();
+        model.addAttribute("user", user);
+        return "user_profile";
     }
 
 }

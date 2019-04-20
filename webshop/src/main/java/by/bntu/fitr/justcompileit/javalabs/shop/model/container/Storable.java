@@ -2,7 +2,10 @@ package by.bntu.fitr.justcompileit.javalabs.shop.model.container;
 
 import by.bntu.fitr.justcompileit.javalabs.shop.util.exceptions.logic.IndexOutOfBoundsContainerException;
 
-public interface Storable<T> {
+import java.util.Collection;
+import java.util.stream.Collector;
+
+public interface Storable<T>{
 
     T get(int index) throws IndexOutOfBoundsContainerException;
 

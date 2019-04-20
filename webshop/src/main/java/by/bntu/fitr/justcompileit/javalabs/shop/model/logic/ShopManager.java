@@ -3,6 +3,7 @@ package by.bntu.fitr.justcompileit.javalabs.shop.model.logic;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.container.Stock;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Human;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
+import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.User;
 import by.bntu.fitr.justcompileit.javalabs.shop.util.exceptions.logic.IndexOutOfBoundsStockException;
 import org.apache.log4j.Logger;
 
@@ -51,6 +52,20 @@ public class ShopManager {
             }
         }
         return totalWeight;
+    }
+
+    public static boolean buyPurchase(User user) {
+
+        boolean buyResult = false;
+
+        double totalPrice = calculateTotalAmount(user);
+
+        if (totalPrice < user.getMoney()) {
+            user.getBasket().clear();
+            user.setMoney(user.getMoney() - totalPrice);
+            buyResult = true;
+        }
+        return buyResult;
     }
 }
 

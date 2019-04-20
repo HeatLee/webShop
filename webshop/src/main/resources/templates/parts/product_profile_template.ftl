@@ -14,7 +14,7 @@
             <h3>${product.toString()}</h3>
             <div class="text-center">
                 <#if isContains>
-                    <a href="/basket">Go to basket</a>
+                    <a href="/basket" class="text-success">Go to basket</a>
                 <#else>
                 <form method="post">
                     <input type="hidden" name="_csrf" value="${_csrf.token}"/>

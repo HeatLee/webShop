@@ -1,9 +1,9 @@
 <#macro page path isRegisterForm>
 <form action="${path}" method="post">
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label">User name:</label>
+        <label class="col-sm-2 col-form-label">Username:</label>
         <div class="col-sm-6">
-            <input type="text" name="username" class="form-control" placeholder="User name" />
+            <input type="text" name="username" class="form-control" placeholder="Username" />
         </div>
     </div>
     <div class="form-group row">

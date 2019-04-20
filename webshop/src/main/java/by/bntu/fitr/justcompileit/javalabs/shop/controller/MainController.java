@@ -34,13 +34,14 @@ public class MainController {
     }
 
     @GetMapping("/fruits")
-    public String showStoreShop(Model model) {
+    public String showFruits(Model model) {
         model.addAttribute("products", productService.getFruits());
         return "fruits";
     }
 
     @GetMapping("/vegetables")
     public String showVegetables(Model model) {
+        model.addAttribute("products",productService.getVegetables());
         return "vegetables";
     }
 

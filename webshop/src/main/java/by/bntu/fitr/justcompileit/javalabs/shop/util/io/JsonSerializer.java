@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
 
 public class JsonSerializer<T> implements Serializer<T> {
 
@@ -28,9 +27,9 @@ public class JsonSerializer<T> implements Serializer<T> {
     }
 
     @Override
-    public void writePolymorphicObjects(T data, Class parent, List<Class> hiers) {
+    public void writePolymorphicObjects(T data, Class parent, Class[] heirs) {
         RuntimeTypeAdapterFactory<?> runtimeTypeAdapterFactory = RuntimeTypeAdapterFactory.of(parent);
-        for (Class hier : hiers) {
+        for (Class hier : heirs) {
             runtimeTypeAdapterFactory.registerSubtype(hier);
         }
         Gson gson = new GsonBuilder().registerTypeAdapterFactory(runtimeTypeAdapterFactory).create();

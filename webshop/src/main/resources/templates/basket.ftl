@@ -2,13 +2,18 @@
 
 <@common.page>
 <div class="text-center">
-    <h3>Total price: ${totalPrice} $</h3>
-    <form method="post">
-        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-        <div class="buttonInHeader">
-            <button class="btn btn-success" type="submit">Buy</button>
-        </div>
-    </form>
+    <#if buyResult?? && !buyResult>
+            <h3 class="text-danger">Error! You have too little money in your balance.</h3>
+            <a href="/user_profile" class="text-success">Replenish it and try again.</a>
+    <#else>
+        <h3>Total price: ${totalPrice}  $</h3>
+            <form method="post">
+                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                <div class="buttonInHeader">
+                    <button class="btn btn-success" type="submit">Buy</button>
+                </div>
+            </form>
+    </#if>
 </div>
 <table class="table table-hover">
     <tbody>
