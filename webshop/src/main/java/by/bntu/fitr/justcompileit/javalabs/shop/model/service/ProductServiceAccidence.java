@@ -61,7 +61,7 @@ public class ProductServiceAccidence implements ProductService {
                 vegetables.add(product);
             }
         }
-        return  vegetables.toArray();
+        return vegetables.toArray();
     }
 
     private void update() {
@@ -69,7 +69,6 @@ public class ProductServiceAccidence implements ProductService {
                 Product.class, ShopType.PRODUCT.getTypes());
     }
 
-    @Override
     public boolean append(Product product) {
         boolean result = false;
         if (!exists(product) && stock.add(product)) {
@@ -103,7 +102,7 @@ public class ProductServiceAccidence implements ProductService {
             update();
             result = true;
         }
-        return false;
+        return result;
     }
 
     @Override

@@ -38,7 +38,9 @@ public class Orange extends Fruit {
     }
 
     public void setDiameter(double diameter) {
-        this.diameter = diameter;
+        if (diameter > DEFAULT_DIAMETER_ORANGE) {
+            this.diameter = diameter;
+        }
     }
 
     public double getAmountOfVitaminC() {
@@ -46,7 +48,9 @@ public class Orange extends Fruit {
     }
 
     public void setAmountOfVitaminC(double amountOfVitaminC) {
-        this.amountOfVitaminC = amountOfVitaminC;
+        if (amountOfVitaminC > DEFAULT_AMOUNT_OF_VITAMIN_C_OF_ORANGE) {
+            this.amountOfVitaminC = amountOfVitaminC;
+        }
     }
 
     @Override

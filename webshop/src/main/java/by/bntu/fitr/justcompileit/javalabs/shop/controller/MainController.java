@@ -5,17 +5,16 @@ import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.User;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.logic.ShopManager;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.service.ProductService;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.service.UserService;
-import by.bntu.fitr.justcompileit.javalabs.shop.util.exceptions.logic.IndexOutOfBoundsContainerException;
-import by.bntu.fitr.justcompileit.javalabs.shop.util.exceptions.logic.IndexOutOfBoundsStockException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Arrays;
-import java.util.Map;
 
 @Controller
 public class MainController {

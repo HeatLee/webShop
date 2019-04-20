@@ -10,9 +10,10 @@ import org.apache.log4j.Logger;
 public class ShopManager {
 
     public static final double DEFAULT_TOTAL_VALUE = 0.0;
-    public static final String LOGGER_GET_PRODUCT_INFO = "Attempt to get product with index ";
+    public static final String LOGGER_GET_PRODUCT = "Attempt to get product with index ";
+    public static final String LOGGER_NULL_POINTER_PRODUCT_INFO = "Product has NullPointer. Index of basket: ";
 
-    private static Logger logger = Logger.getLogger(ShopManager.class);
+    private static Logger LOGGER = Logger.getLogger(ShopManager.class);
 
     public static double calculateTotalAmount(Human human) {
 
@@ -22,13 +23,16 @@ public class ShopManager {
         for (int i = 0; i < stock.size(); i++) {
             Product product = null;
             try {
-                logger.info(LOGGER_GET_PRODUCT_INFO + i);
+                LOGGER.trace(LOGGER_GET_PRODUCT + i);
                 product = stock.get(i);
             } catch (IndexOutOfBoundsStockException e) {
-                logger.error(e.getMessage());
+                LOGGER.error(e.getMessage());
             }
+
             if (product != null) {
                 totalAmount += product.getCost();
+            } else {
+                LOGGER.warn(LOGGER_NULL_POINTER_PRODUCT_INFO + i);
             }
         }
         return totalAmount;
@@ -42,13 +46,15 @@ public class ShopManager {
         for (int i = 0; i < stock.size(); i++) {
             Product product = null;
             try {
-                logger.info(LOGGER_GET_PRODUCT_INFO);
+                LOGGER.trace(LOGGER_GET_PRODUCT);
                 product = stock.get(i);
             } catch (IndexOutOfBoundsStockException e) {
-                logger.error(e.getMessage());
+                LOGGER.error(e.getMessage());
             }
             if (product != null) {
                 totalWeight += product.getWeight();
+            } else {
+                LOGGER.warn(LOGGER_NULL_POINTER_PRODUCT_INFO + i);
             }
         }
         return totalWeight;
@@ -68,4 +74,3 @@ public class ShopManager {
         return buyResult;
     }
 }
-

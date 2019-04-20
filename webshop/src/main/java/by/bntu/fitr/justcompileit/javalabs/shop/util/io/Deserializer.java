@@ -10,3 +10,4 @@ public interface Deserializer<T> {
     T[] readArrayPolymorphicObjects(Class<T[]> mainClass, Class parent, Class[] heirs);
 
 }
+

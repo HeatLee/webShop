@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Product {
 
+    public static final double DEFAULT_VALUE = 0.0;
     public static final double DEFAULT_PRODUCT_COST = Double.MAX_VALUE;
     public static final double DEFAULT_PRODUCT_WEIGHT = Double.MAX_VALUE;
 
@@ -19,6 +20,7 @@ public class Product {
     private long id;
     private double cost;
     private double weight;
+
     private String fileName;
     private String productName;
     private String countryProducer;
@@ -63,7 +65,9 @@ public class Product {
     }
 
     public void setCost(double cost) {
-        this.cost = cost;
+        if (cost > DEFAULT_VALUE) {
+            this.cost = cost;
+        }
     }
 
     public double getWeight() {
@@ -71,7 +75,9 @@ public class Product {
     }
 
     public void setWeight(double weight) {
-        this.weight = weight;
+        if (weight > DEFAULT_VALUE) {
+            this.weight = weight;
+        }
     }
 
     public String getFileName() {

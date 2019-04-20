@@ -1,16 +1,1 @@
-[
-  {
-    "id": 1,
-    "username": "Iohhanes",
-    "password": "123",
-    "active": true,
-    "roles": [
-      "USER"
-    ],
-    "money": 0.69,
-    "basket": {
-      "stock": [],
-      "size": 0
-    }
-  }
-]
+[]
