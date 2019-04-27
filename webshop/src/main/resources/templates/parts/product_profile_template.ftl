@@ -17,8 +17,11 @@
                     <a href="/basket" class="text-success">Go to basket</a>
                 <#else>
                 <form method="post">
-                    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                    <button class="btn btn-success" type="submit">Add to basket</button>
+                    <div class="form-group row">
+                        <input type="number" name="weight" min="0.05" max="10000.00" step="0.05" value="1.00"/>
+                        <button class="btn btn-success" type="submit">Add to basket</button>
+                        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                    </div>
                 </form>
                 </#if>
             </div>

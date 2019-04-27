@@ -7,6 +7,7 @@ import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.User;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -14,7 +15,7 @@ import java.util.EnumSet;
 import java.util.Map;
 
 @Controller
-public class RegistrationController {
+public class AuthenticationController {
 
     @Autowired
     private UserService userService;
@@ -23,6 +24,15 @@ public class RegistrationController {
     public String registration() {
         return "registration";
     }
+
+
+//    @GetMapping("/login")
+//    public String login(String error, Model model){
+//        if(error!=null){
+//            model.addAttribute("error","Error!");
+//        }
+//        return "login";
+//    }
 
     @PostMapping("/registration")
     public String addUser(User user, Map<String, Object> model) {

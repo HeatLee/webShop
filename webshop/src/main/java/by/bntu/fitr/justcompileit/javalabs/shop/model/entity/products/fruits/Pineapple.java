@@ -1,5 +1,6 @@
 package by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.fruits;
 
+import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Fruit;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Ripeness;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Sweetness;
@@ -39,6 +40,11 @@ public class Pineapple extends Fruit {
     }
 
     @Override
+    public Product copy() {
+        return new Pineapple(this);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -56,7 +62,6 @@ public class Pineapple extends Fruit {
     public String toString() {
         return "price per kilogram: " + super.getCost() + " $" +
                 "\nproducing country: " + super.getCountryProducer() +
-                "\naverage weight: " + super.getWeight() + " g" +
                 "\naverage diameter: " + diameter + " mm";
     }
 }

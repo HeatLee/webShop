@@ -64,18 +64,20 @@ public class ProductServiceAccidence implements ProductService {
         return vegetables.toArray();
     }
 
-    private void update() {
+    @Override
+    public void update() {
         new JsonSerializer<Product[]>(PRODUCTS_FILE_NAME).writePolymorphicObjects(stock.toArray(),
                 Product.class, ShopType.PRODUCT.getTypes());
     }
 
+    @Override
     public boolean append(Product product) {
         boolean result = false;
         if (!exists(product) && stock.add(product)) {
             update();
             result = true;
         }
-        return false;
+        return result;
     }
 
     @Override

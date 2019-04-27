@@ -36,9 +36,10 @@ public class UserActionController {
 
     @RequestMapping(value = "/products/{productId}", method = RequestMethod.POST)
     public String addToBasket(@AuthenticationPrincipal UserDetails userDetails,
-                              @PathVariable String productId, Model model) {
+                              @PathVariable String productId, @RequestParam double weight, Model model) {
         User user = userService.findByUsername(userDetails.getUsername());
-        Product productAdded = productService.findById(Long.parseLong(productId));
+        Product productAdded = productService.findById(Long.parseLong(productId)).copy();
+        productAdded.setWeight(weight);
         user.getBasket().add(productAdded);
         userService.update();
         model.addAttribute("product", productAdded);

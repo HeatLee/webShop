@@ -44,6 +44,11 @@ public class Fruit extends Product {
     }
 
     @Override
+    public Product copy() {
+        return new Fruit(this);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

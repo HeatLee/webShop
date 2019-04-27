@@ -7,7 +7,7 @@
     "sweetness": "SOUR",
     "id": 1,
     "cost": 2.10,
-    "weight": 100.0,
+    "weight": 0,
     "fileName": "orange.png",
     "productName": "Orange",
     "countryProducer": "Brazil"
@@ -19,7 +19,7 @@
     "sweetness": "SWEETNESS",
     "id": 2,
     "cost": 4.71,
-    "weight": 85.0,
+    "weight": 0,
     "fileName": "pear.png",
     "productName": "Pear",
     "countryProducer": "China"
@@ -31,7 +31,7 @@
     "sweetness": "SWEET_AND_SOUR",
     "id": 3,
     "cost": 2.00,
-    "weight": 1000.0,
+    "weight": 0,
     "fileName": "pineapple.png",
     "productName": "Pineapple",
     "countryProducer": "Costa Rica"
@@ -44,7 +44,7 @@
     "sweetness": "SWEETNESS",
     "id": 4,
     "cost": 1.60,
-    "weight": 100.0,
+    "weight": 0,
     "fileName": "apple.png",
     "productName": "Apple",
     "countryProducer": "China"

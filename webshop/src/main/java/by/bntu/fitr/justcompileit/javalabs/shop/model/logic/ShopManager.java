@@ -30,7 +30,7 @@ public class ShopManager {
             }
 
             if (product != null) {
-                totalAmount += product.getCost();
+                totalAmount += product.getCost() * product.getWeight();
             } else {
                 LOGGER.warn(LOGGER_NULL_POINTER_PRODUCT_INFO + i);
             }

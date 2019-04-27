@@ -27,7 +27,8 @@
                 </a>
             </td>
             <td width="500" class="text-center align-middle">
-                    ${product.productName} - ${product.cost} $
+                <p>${product.productName} - ${product.cost} $</p>
+                        <p>${product.weight} kg</p>
             </td>
             <td width="50" class="align-middle">
                 <div class="text-center">

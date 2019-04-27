@@ -126,7 +126,7 @@ public class ArrayStock implements Stock {
             }
         } else {
             for (int i = 0; i < size; i++) {
-                if (product.equals(stock[i])) {
+                if (product.getId() == stock[i].getId()) {
                     indexProduct = i;
                     break;
                 }

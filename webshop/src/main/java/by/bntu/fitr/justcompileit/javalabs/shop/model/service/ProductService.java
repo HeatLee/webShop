@@ -15,6 +15,8 @@ public interface ProductService {
 
     boolean remove(Product product);
 
+    void update();
+
     Product findById(Long id);
 
     Product[] getFruits();

@@ -2,7 +2,7 @@ package by.bntu.fitr.justcompileit.javalabs.shop.model.entity;
 
 import java.util.Objects;
 
-public class Product {
+public class Product implements Copyable {
 
     public static final double DEFAULT_VALUE = 0.0;
     public static final double DEFAULT_PRODUCT_COST = Double.MAX_VALUE;
@@ -45,6 +45,7 @@ public class Product {
     }
 
     public Product(Product product) {
+        this.id = product.id;
         this.cost = product.cost;
         this.weight = product.weight;
         this.productName = product.productName;
@@ -102,6 +103,11 @@ public class Product {
 
     public void setCountryProducer(String countryProducer) {
         this.countryProducer = countryProducer;
+    }
+
+    @Override
+    public Product copy() {
+        return new Product(this);
     }
 
     @Override

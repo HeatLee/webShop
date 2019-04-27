@@ -31,18 +31,20 @@ public class UserServiceAccidence implements UserService {
         this.database = database;
     }
 
-    public UserList getDatabase() {
-        return database;
-    }
-
     public void setDatabase(UserList database) {
         this.database = database;
     }
 
+    public UserList getDatabase() {
+        return database;
+    }
+
+    @Override
     public boolean exists(User user) {
         return findByUsername(user.getUsername()) != null;
     }
 
+    @Override
     public User findByUsername(String username) {
         User user = null;
         for (User userSearch : database.toArray()) {
@@ -54,6 +56,7 @@ public class UserServiceAccidence implements UserService {
         return user;
     }
 
+    @Override
     public boolean save(User user) {
         boolean result = false;
         if (!exists(user) && database.add(user)) {
@@ -63,6 +66,7 @@ public class UserServiceAccidence implements UserService {
         return result;
     }
 
+    @Override
     public boolean remove(User user) {
         boolean result = false;
         if (exists(user) && database.delete(user)) {
@@ -72,11 +76,13 @@ public class UserServiceAccidence implements UserService {
         return result;
     }
 
+    @Override
     public void update() {
         new JsonSerializer<User[]>(USERS_FILE_NAME).writePolymorphicObjects(
                 database.toArray(), Product.class, ShopType.PRODUCT.getTypes());
     }
 
+    @Override
     public UserList findAll() {
         return getDatabase();
     }
