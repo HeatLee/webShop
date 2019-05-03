@@ -1,44 +1,51 @@
 package by.bntu.fitr.justcompileit.javalabs.shop.controller;
 
+import by.bntu.fitr.justcompileit.javalabs.shop.config.RegistrationValidator;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.container.ArrayStock;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Role;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.User;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.service.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.EnumSet;
-import java.util.Map;
 
 @Controller
 public class AuthenticationController {
 
+    private static final Logger LOGGER = Logger.getLogger(AuthenticationController.class);
+    private static final String INVALID_REGISTRATION_DATA_MESSAGE = "Invalid registration data.";
+    private static final String INVALID_USERNAME_OR_PASSWORD_MESSAGE = "Invalid username or password.";
+
+
+    @Value("${InvalidData}")
+    private String invalidData;
+
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RegistrationValidator registrationValidator;
+
     @GetMapping("/registration")
-    public String registration() {
+    public String registration(Model model) {
+        model.addAttribute("userForm", new User());
         return "registration";
     }
 
-
-//    @GetMapping("/login")
-//    public String login(String error, Model model){
-//        if(error!=null){
-//            model.addAttribute("error","Error!");
-//        }
-//        return "login";
-//    }
-
     @PostMapping("/registration")
-    public String addUser(User user, Map<String, Object> model) {
-        User userFromDb = userService.findByUsername(user.getUsername());
-        if (userFromDb != null) {
-            model.put("message", "User exists!");
+    public String addUser(@ModelAttribute(name = "userForm") User user, BindingResult bindingResult) {
+        registrationValidator.validate(user, bindingResult);
+        if (bindingResult.hasErrors()) {
+            LOGGER.warn(INVALID_REGISTRATION_DATA_MESSAGE);
             return "registration";
         }
         user.setActive(true);
@@ -47,4 +54,14 @@ public class AuthenticationController {
         userService.save(user);
         return "redirect:/login";
     }
+
+    @GetMapping("/login")
+    public String login(Model model, String error) {
+        if (error != null) {
+            LOGGER.warn(INVALID_USERNAME_OR_PASSWORD_MESSAGE);
+            model.addAttribute("error", invalidData);
+        }
+        return "login";
+    }
+
 }

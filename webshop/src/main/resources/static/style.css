@@ -25,6 +25,10 @@ div.card-columns {
     -webkit-column-count: 4;
 }
 
+div.alert.alert-danger{
+    margin-top: 10px;
+}
+
 input[type="radio"], input[type="checkbox"] {
     line-height: normal;
     margin: 0;
