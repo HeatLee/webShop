@@ -2,10 +2,11 @@ package by.bntu.fitr.justcompileit.javalabs.shop.model.entity;
 
 import by.bntu.fitr.justcompileit.javalabs.shop.model.container.Stock;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 
-public class User extends Human {
+public class User extends Human implements Serializable {
 
     private static long amount;
     private long id;
@@ -15,19 +16,12 @@ public class User extends Human {
     private Set<Role> roles;
     private double money;
 
-    static {
-        amount = 1L;
-    }
-
-    {
-        this.id = amount++;
-    }
-
     public User() {
     }
 
     public User(String username, String password, boolean active, Set<Role> roles, double money, Stock basket) {
         super(basket);
+        this.id = ++amount;
         this.username = username;
         this.password = password;
         this.active = active;
@@ -37,6 +31,7 @@ public class User extends Human {
 
     public User(User user) {
         super(user);
+        this.id = ++amount;
         this.username = user.username;
         this.password = user.password;
         this.active = user.active;

@@ -6,8 +6,10 @@ import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.ShopType;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Fruit;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Vegetable;
+import by.bntu.fitr.justcompileit.javalabs.shop.util.io.Deserializer;
 import by.bntu.fitr.justcompileit.javalabs.shop.util.io.JsonDeserializer;
 import by.bntu.fitr.justcompileit.javalabs.shop.util.io.JsonSerializer;
+import by.bntu.fitr.justcompileit.javalabs.shop.util.io.Serializer;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -18,10 +20,13 @@ public class ProductServiceAccidence implements ProductService {
     public static final String PRODUCT_COLLECTION = "ProductServiceAccidence serves products:\n";
     public static final String PRODUCTS_FILE_NAME = "dataSource/products.json";
 
+    private static final Serializer<Product> serializer = new JsonSerializer<>(PRODUCTS_FILE_NAME);
+    private static final Deserializer<Product> deserializer = new JsonDeserializer<>(PRODUCTS_FILE_NAME);
+
     private Stock stock;
 
     public ProductServiceAccidence() {
-        stock = new ArrayStock(new JsonDeserializer<Product>(PRODUCTS_FILE_NAME).readArrayPolymorphicObjects(
+        stock = new ArrayStock(deserializer.readArrayPolymorphicObjects(
                 Product[].class, Product.class, ShopType.PRODUCT.getTypes()));
     }
 
@@ -66,7 +71,7 @@ public class ProductServiceAccidence implements ProductService {
 
     @Override
     public void update() {
-        new JsonSerializer<Product[]>(PRODUCTS_FILE_NAME).writePolymorphicObjects(stock.toArray(),
+        serializer.writePolymorphicObjects(stock.toArray(),
                 Product.class, ShopType.PRODUCT.getTypes());
     }
 

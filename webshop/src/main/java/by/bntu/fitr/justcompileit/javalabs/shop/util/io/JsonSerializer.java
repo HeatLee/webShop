@@ -22,21 +22,21 @@ public class JsonSerializer<T> implements Serializer<T> {
     }
 
     @Override
-    public void writeObjects(T data) {
-        write(data, new Gson());
+    public void writeObjects(T[] data) {
+        writeArrray(data, new Gson());
     }
 
     @Override
-    public void writePolymorphicObjects(T data, Class parent, Class[] heirs) {
+    public void writePolymorphicObjects(T[] data, Class parent, Class[] heirs) {
         RuntimeTypeAdapterFactory<?> runtimeTypeAdapterFactory = RuntimeTypeAdapterFactory.of(parent);
         for (Class hier : heirs) {
             runtimeTypeAdapterFactory.registerSubtype(hier);
         }
         Gson gson = new GsonBuilder().registerTypeAdapterFactory(runtimeTypeAdapterFactory).create();
-        write(data, gson);
+        writeArrray(data, gson);
     }
 
-    private void write(T data, Gson gson) {
+    private void writeArrray(T[] data, Gson gson) {
         try (FileWriter fileWriter = new FileWriter(fileName)) {
             fileWriter.write(gson.toJson(data));
             LOG.info(fileName + SUCCESSFULLY_WRITE_FILE);

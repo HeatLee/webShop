@@ -7,9 +7,12 @@ import by.bntu.fitr.justcompileit.javalabs.shop.model.container.UserList;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.ShopType;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.User;
+import by.bntu.fitr.justcompileit.javalabs.shop.util.MD5Hash;
+import by.bntu.fitr.justcompileit.javalabs.shop.util.io.Deserializer;
 import by.bntu.fitr.justcompileit.javalabs.shop.util.io.JsonDeserializer;
 import by.bntu.fitr.justcompileit.javalabs.shop.util.io.JsonSerializer;
 
+import by.bntu.fitr.justcompileit.javalabs.shop.util.io.Serializer;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -21,8 +24,11 @@ public class UserServiceAccidence implements UserService {
 
     private UserList database;
 
+    private static final Serializer<User> serializer = new JsonSerializer<>(USERS_FILE_NAME);
+    private static final Deserializer<User> deserializer = new JsonDeserializer<>(USERS_FILE_NAME);
+
     public UserServiceAccidence() {
-        this.database = new UserArrayList(new JsonDeserializer<User>(USERS_FILE_NAME).readArrayNestedObjects(
+        this.database = new UserArrayList(deserializer.readArrayNestedObjects(
                 User[].class, Stock.class, ArrayStock.class, Product.class,
                 ShopType.PRODUCT.getTypes()));
     }
@@ -60,6 +66,7 @@ public class UserServiceAccidence implements UserService {
     public boolean save(User user) {
         boolean result = false;
         if (!exists(user) && database.add(user)) {
+            user.setPassword(MD5Hash.getHash(user.getPassword()));
             update();
             result = true;
         }
@@ -78,7 +85,7 @@ public class UserServiceAccidence implements UserService {
 
     @Override
     public void update() {
-        new JsonSerializer<User[]>(USERS_FILE_NAME).writePolymorphicObjects(
+        serializer.writePolymorphicObjects(
                 database.toArray(), Product.class, ShopType.PRODUCT.getTypes());
     }
 

@@ -12,9 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.EnumSet;
 
@@ -42,12 +40,13 @@ public class AuthenticationController {
     }
 
     @PostMapping("/registration")
-    public String addUser(@ModelAttribute(name = "userForm") User user, BindingResult bindingResult) {
-        registrationValidator.validate(user, bindingResult);
+    public String addUser(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
+        registrationValidator.validate(userForm, bindingResult);
         if (bindingResult.hasErrors()) {
             LOGGER.warn(INVALID_REGISTRATION_DATA_MESSAGE);
             return "registration";
         }
+        User user = new User(userForm);
         user.setActive(true);
         user.setRoles(EnumSet.of(Role.USER));
         user.setBasket(new ArrayStock(new Product[0]));

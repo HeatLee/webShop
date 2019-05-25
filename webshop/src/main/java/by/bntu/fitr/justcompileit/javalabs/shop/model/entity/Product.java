@@ -1,8 +1,9 @@
 package by.bntu.fitr.justcompileit.javalabs.shop.model.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Product implements Copyable {
+public class Product implements Copyable, Serializable {
 
     public static final double DEFAULT_VALUE = 0.0;
     public static final double DEFAULT_PRODUCT_COST = Double.MAX_VALUE;
