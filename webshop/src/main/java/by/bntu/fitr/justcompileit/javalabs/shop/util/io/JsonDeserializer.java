@@ -12,10 +12,10 @@ import java.util.Scanner;
 public class JsonDeserializer<T> implements Deserializer<T> {
 
 
-    public static final String ERROR_OPEN_FILE = " cannot opened!";
-    public static final String SUCCESSFULLY_READ_FILE = " successfully read.";
+    public static final String ERROR_OPEN_FILE = " cannot opened";
+    public static final String SUCCESSFULLY_READ_FILE = " successfully read";
 
-    private static final Logger LOG = Logger.getLogger(JsonDeserializer.class);
+    private static final Logger LOGGER = Logger.getLogger(JsonDeserializer.class);
 
     private String fileName;
 
@@ -53,9 +53,9 @@ public class JsonDeserializer<T> implements Deserializer<T> {
                 data.append(scanner.nextLine());
             }
             objects = gson.fromJson(data.toString(), mainClass);
-            LOG.info(fileName + SUCCESSFULLY_READ_FILE);
+            LOGGER.info(fileName + SUCCESSFULLY_READ_FILE);
         } catch (IOException e) {
-            LOG.error(fileName + ERROR_OPEN_FILE);
+            LOGGER.error(fileName + ERROR_OPEN_FILE);
         }
         return objects;
     }

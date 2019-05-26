@@ -9,6 +9,8 @@ import java.util.Objects;
 
 public class Banana extends Fruit {
 
+    private static final long serialVersionUID = 105L;
+
     public static final double DEFAULT_BANANA_LENGTH = 0.0;
 
     private double length;

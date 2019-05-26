@@ -2,11 +2,12 @@ package by.bntu.fitr.justcompileit.javalabs.shop.model.entity;
 
 import by.bntu.fitr.justcompileit.javalabs.shop.model.container.Stock;
 
-import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 
-public class User extends Human implements Serializable {
+public class User extends Human {
+
+    private static final long serialVersionUID = 21L;
 
     private static long amount;
     private long id;

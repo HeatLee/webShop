@@ -3,7 +3,9 @@ package by.bntu.fitr.justcompileit.javalabs.shop.model.container;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
 import by.bntu.fitr.justcompileit.javalabs.shop.util.exceptions.logic.IndexOutOfBoundsStockException;
 
-public interface Stock {
+import java.io.Serializable;
+
+public interface Stock extends Serializable {
 
     Product get(int index) throws IndexOutOfBoundsStockException;
 

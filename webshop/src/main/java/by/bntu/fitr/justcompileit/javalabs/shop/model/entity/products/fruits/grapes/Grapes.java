@@ -9,6 +9,8 @@ import java.util.Objects;
 
 public class Grapes extends Fruit {
 
+    private static final long serialVersionUID = 104L;
+
     private GrapesColor grapesColor;
 
     public Grapes() {

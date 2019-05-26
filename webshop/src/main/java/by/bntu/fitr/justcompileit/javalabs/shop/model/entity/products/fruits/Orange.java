@@ -9,10 +9,12 @@ import java.util.Objects;
 
 public class Orange extends Fruit {
 
+    private static final long serialVersionUID = 101L;
+
     public static final double DEFAULT_DIAMETER_ORANGE = 0.0;
     public static final double DEFAULT_AMOUNT_OF_VITAMIN_C_OF_ORANGE = 0.0;
 
-    private double diameter;
+    private transient double diameter;
     private double amountOfVitaminC;
 
     public Orange() {

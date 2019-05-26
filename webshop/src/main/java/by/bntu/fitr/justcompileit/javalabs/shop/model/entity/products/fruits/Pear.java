@@ -4,11 +4,12 @@ import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Fruit;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Ripeness;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Sweetness;
-import lombok.Data;
 
 import java.util.Objects;
 
 public class Pear extends Fruit {
+
+    private static final long serialVersionUID = 102L;
 
     public static final double DEFAULT_PEAR_DIAMETER = 0.0;
 

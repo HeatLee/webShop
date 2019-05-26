@@ -3,7 +3,9 @@ package by.bntu.fitr.justcompileit.javalabs.shop.model.container;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.User;
 import by.bntu.fitr.justcompileit.javalabs.shop.util.exceptions.logic.IndexOutOfBoundsUserListException;
 
-public interface UserList {
+import java.io.Serializable;
+
+public interface UserList extends Serializable {
 
     User get(int index) throws IndexOutOfBoundsUserListException;
 

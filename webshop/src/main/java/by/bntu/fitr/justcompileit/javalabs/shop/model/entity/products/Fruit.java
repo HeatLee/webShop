@@ -6,6 +6,8 @@ import java.util.Objects;
 
 public class Fruit extends Product {
 
+    private static final long serialVersionUID = 11L;
+
     private Ripeness ripeness;
     private Sweetness sweetness;
 

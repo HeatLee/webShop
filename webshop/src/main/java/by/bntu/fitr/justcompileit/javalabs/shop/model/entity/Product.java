@@ -5,6 +5,8 @@ import java.util.Objects;
 
 public class Product implements Copyable, Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     public static final double DEFAULT_VALUE = 0.0;
     public static final double DEFAULT_PRODUCT_COST = Double.MAX_VALUE;
     public static final double DEFAULT_PRODUCT_WEIGHT = Double.MAX_VALUE;

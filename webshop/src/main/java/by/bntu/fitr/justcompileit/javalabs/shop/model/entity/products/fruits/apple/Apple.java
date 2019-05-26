@@ -9,6 +9,8 @@ import java.util.Objects;
 
 public class Apple extends Fruit {
 
+    private static final long serialVersionUID = 106L;
+
     public static final double DEFAULT_DIAMETER_VALUE = 0.0;
 
     private double diameter;

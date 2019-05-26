@@ -7,6 +7,8 @@ import java.util.Arrays;
 
 public class ArrayStock implements Stock {
 
+    private static final long serialVersionUID = 1001L;
+
     public static final int OFFSET = 1;
     public static final int HASH_NUM = 31;
     public static final int BEGIN_VALUE = 0;

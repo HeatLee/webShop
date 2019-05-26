@@ -9,6 +9,8 @@ import java.util.Objects;
 
 public class Pineapple extends Fruit {
 
+    private static final long serialVersionUID = 103L;
+
     public static final double DEFAULT_PEAR_DIAMETER = 0.0;
 
     private double diameter;

@@ -7,6 +7,8 @@ import java.util.Arrays;
 
 public class UserArrayList implements UserList {
 
+    private static final long serialVersionUID = 1002L;
+
     public static final int OFFSET = 1;
     public static final int HASH_NUM = 31;
     public static final int DEFAULT_INDEX = -1;
