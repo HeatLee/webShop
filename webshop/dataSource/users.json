@@ -1,1 +1,43 @@
-[]
+[
+  {
+    "id": 1,
+    "username": "Iohhanes",
+    "password": "6aee76ad7d5476a675eb3fd9fa2084b3",
+    "active": true,
+    "roles": [
+      "USER"
+    ],
+    "money": 34.0,
+    "basket": {
+      "stock": [
+        {
+          "type": "Orange",
+          "amountOfVitaminC": 6.0E-4,
+          "ripeness": "RIPE",
+          "sweetness": "SOUR",
+          "id": 1,
+          "cost": 2.1,
+          "weight": 2.5,
+          "fileName": "orange.png",
+          "productName": "Orange",
+          "countryProducer": "Brazil"
+        }
+      ],
+      "size": 1
+    }
+  },
+  {
+    "id": 2,
+    "username": "L_Sobolev",
+    "password": "1a833da63a6b7e20098dae06d06602e1",
+    "active": true,
+    "roles": [
+      "USER"
+    ],
+    "money": 0.0,
+    "basket": {
+      "stock": [],
+      "size": 0
+    }
+  }
+]

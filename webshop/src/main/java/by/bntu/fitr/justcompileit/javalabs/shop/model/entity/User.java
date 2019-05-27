@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class User extends Human {
 
-    private static final long serialVersionUID = 21L;
+    private static final long serialVer0sionUID = 21L;
 
     private static long amount;
     private long id;
