@@ -1,5 +1,6 @@
 package by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.vegetables.cucumber;
 
+import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Ripeness;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Vegetable;
 
@@ -9,7 +10,7 @@ public class Cucumber extends Vegetable {
 
     private static final long serialVersionUID = 203L;
 
-    private static final double DEFAULT_LENGTH_VALUE = 20;
+    private static final double DEFAULT_LENGTH_VALUE = 10;
     private static final double DEFAULT_THICKNESS_VALUE = 2;
 
     private double length;
@@ -19,7 +20,7 @@ public class Cucumber extends Vegetable {
     public Cucumber() {
         super();
         this.length = DEFAULT_LENGTH_VALUE;
-        this.smoothness = Smoothness.SMOOTH;
+        this.smoothness = Smoothness.GRAINY;
         this.thickness = DEFAULT_THICKNESS_VALUE;
     }
 
@@ -60,6 +61,11 @@ public class Cucumber extends Vegetable {
 
     public void setLength(double length) {
         this.length = length;
+    }
+
+    @Override
+    public Product copy() {
+        return new Cucumber(this);
     }
 
     @Override

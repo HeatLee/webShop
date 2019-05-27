@@ -1,11 +1,12 @@
 package by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.vegetables.cabbage;
 
+import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Ripeness;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Vegetable;
 
 import java.util.Objects;
 
-public class Cabbage extends Vegetable {
+public class Cabbage extends Vegetable{
     private static final long serialVersionUID = 203L;
 
     private static final double DEFAULT_DIAMETER_VALUE = 20;
@@ -70,6 +71,11 @@ public class Cabbage extends Vegetable {
         return Double.compare(cabbage.diameter, diameter) == 0 &&
                 Double.compare(cabbage.leafSize, leafSize) == 0 &&
                 color == cabbage.color;
+    }
+
+    @Override
+    public Product copy() {
+        return new Cabbage(this);
     }
 
     @Override

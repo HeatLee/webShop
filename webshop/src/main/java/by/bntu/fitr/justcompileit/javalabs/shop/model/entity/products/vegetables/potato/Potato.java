@@ -1,5 +1,6 @@
 package by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.vegetables.potato;
 
+import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Ripeness;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Sweetness;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Vegetable;
@@ -73,6 +74,11 @@ public class Potato extends Vegetable {
 
     public void setSweetness(Sweetness sweetness) {
         this.sweetness = sweetness;
+    }
+
+    @Override
+    public Product copy() {
+        return new Potato(this);
     }
 
     @Override
