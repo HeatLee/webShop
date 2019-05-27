@@ -58,8 +58,8 @@ public class Grapes extends Fruit {
 
     @Override
     public String toString() {
-        return "price per kilogram: " + super.getCost() + " $" +
-                "\nproducing country: " + super.getCountryProducer() +
-                "\ncolor: " + grapesColor;
+        return "Price per kilogram: " + super.getCost() + " $" +
+                "\nProducing country: " + super.getCountryProducer() +
+                "\nColor: " + grapesColor;
     }
 }

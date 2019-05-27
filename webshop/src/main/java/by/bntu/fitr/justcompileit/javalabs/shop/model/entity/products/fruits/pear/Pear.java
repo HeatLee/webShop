@@ -1,4 +1,4 @@
-package by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.fruits;
+package by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.fruits.pear;
 
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Fruit;
@@ -11,34 +11,30 @@ public class Pear extends Fruit {
 
     private static final long serialVersionUID = 102L;
 
-    public static final double DEFAULT_PEAR_DIAMETER = 0.0;
-
-    private double diameter;
+    private PearForm pearForm;
 
     public Pear() {
         super();
-        diameter = DEFAULT_PEAR_DIAMETER;
+        this.pearForm = PearForm.OBLONG;
     }
 
     public Pear(String productName, String fileName, String countryProducer, double cost, double weight,
-                Ripeness ripeness, Sweetness sweetness, double diameter) {
+                Ripeness ripeness, Sweetness sweetness, PearForm pearForm) {
         super(productName, fileName, countryProducer, cost, weight, ripeness, sweetness);
-        this.diameter = diameter;
+        this.pearForm = pearForm;
     }
 
     public Pear(Pear pear) {
         super(pear);
-        this.diameter = pear.diameter;
+        this.pearForm = pear.pearForm;
     }
 
-    public double getDiameter() {
-        return diameter;
+    public PearForm getPearForm() {
+        return pearForm;
     }
 
-    public void setDiameter(double diameter) {
-        if (diameter > DEFAULT_PEAR_DIAMETER) {
-            this.diameter = diameter;
-        }
+    public void setPearForm(PearForm pearForm) {
+        this.pearForm = pearForm;
     }
 
     @Override
@@ -52,18 +48,18 @@ public class Pear extends Fruit {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Pear pear = (Pear) o;
-        return Double.compare(pear.diameter, diameter) == 0;
+        return pearForm == pear.pearForm;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), diameter);
+        return Objects.hash(super.hashCode(), pearForm);
     }
 
     @Override
     public String toString() {
-        return "price per kilogram: " + super.getCost() + " $" +
-                "\nproducing country: " + super.getCountryProducer() +
-                "\naverage diameter: " + diameter + " mm";
+        return "Price per kilogram: " + super.getCost() + " $" +
+                "\nProducing country: " + super.getCountryProducer() +
+                "\nForm: " + pearForm;
     }
 }

@@ -1,4 +1,4 @@
-package by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.fruits;
+package by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.fruits.pineapple;
 
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Fruit;
@@ -62,8 +62,8 @@ public class Pineapple extends Fruit {
 
     @Override
     public String toString() {
-        return "price per kilogram: " + super.getCost() + " $" +
-                "\nproducing country: " + super.getCountryProducer() +
-                "\naverage diameter: " + diameter + " mm";
+        return "Price per kilogram: " + super.getCost() + " $" +
+                "\nProducing country: " + super.getCountryProducer() +
+                "\nAverage diameter: " + diameter + " mm";
     }
 }

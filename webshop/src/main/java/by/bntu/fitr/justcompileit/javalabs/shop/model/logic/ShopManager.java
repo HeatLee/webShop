@@ -7,13 +7,15 @@ import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.User;
 import by.bntu.fitr.justcompileit.javalabs.shop.util.exceptions.logic.IndexOutOfBoundsStockException;
 import org.apache.log4j.*;
 
+import java.util.concurrent.locks.Lock;
+
 public class ShopManager {
 
     public static final double DEFAULT_TOTAL_VALUE = 0.0;
     public static final String LOGGER_GET_PRODUCT = "Attempt to get product with index ";
     public static final String LOGGER_NULL_POINTER_PRODUCT_INFO = "Product has NullPointer. Index of basket: ";
 
-    private static Logger LOGGER = Logger.getLogger(ShopManager.class);
+    private static final Logger LOGGER = Logger.getLogger(ShopManager.class);
 
     public static double calculateTotalAmount(Human human) {
 

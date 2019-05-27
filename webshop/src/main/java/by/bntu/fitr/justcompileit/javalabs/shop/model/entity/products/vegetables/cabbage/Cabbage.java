@@ -6,11 +6,12 @@ import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Vegetable;
 
 import java.util.Objects;
 
-public class Cabbage extends Vegetable{
-    private static final long serialVersionUID = 203L;
+public class Cabbage extends Vegetable {
+
+    private static final long serialVersionUID = 204L;
 
     private static final double DEFAULT_DIAMETER_VALUE = 20;
-    private  static final double DEFAULT_LEAF_SIZE_VALUE = 30;
+    private static final double DEFAULT_LEAF_SIZE_VALUE = 30;
 
     private double diameter;
     private CabbageColor color;
@@ -85,10 +86,9 @@ public class Cabbage extends Vegetable{
 
     @Override
     public String toString() {
-        return  "\nPrice per kilogram: " + super.getCost() +
+        return "\nPrice per kilogram: " + super.getCost() +" $" +
                 "\nProducing country:" + super.getCountryProducer() +
-                "\nRipeness: " + super.getRipeness() +
-                "\nDiameter: " + diameter +
+                "\nDiameter: " + diameter + " mm" +
                 "\nColor: " + color +
                 "\nLeaf Size: " + leafSize;
     }

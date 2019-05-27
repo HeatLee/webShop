@@ -19,7 +19,7 @@ public class Potato extends Vegetable {
     private double diameter;
     private Sweetness sweetness;
 
-    public Potato(){
+    public Potato() {
         super();
         this.color = PotatoColor.BEIGE;
         this.starchPercentage = DEFAULT_PERCENTAGE_VALUE;
@@ -28,7 +28,7 @@ public class Potato extends Vegetable {
     }
 
     public Potato(String productName, String fileName, String countryProducer, double cost, double weight,
-                  Ripeness ripeness, PotatoColor color, double starchPercentage, double diameter, Sweetness sweetness){
+                  Ripeness ripeness, PotatoColor color, double starchPercentage, double diameter, Sweetness sweetness) {
         super(productName, fileName, countryProducer, cost, weight, ripeness);
         this.color = color;
         this.starchPercentage = starchPercentage;
@@ -36,7 +36,7 @@ public class Potato extends Vegetable {
         this.sweetness = sweetness;
     }
 
-    public Potato(Potato potato){
+    public Potato(Potato potato) {
         super(potato);
         this.color = potato.color;
         this.diameter = potato.diameter;
@@ -100,12 +100,11 @@ public class Potato extends Vegetable {
 
     @Override
     public String toString() {
-        return  "\nPrice per kilogram: " + super.getCost() +
-                "\nRipeness: " + super.getRipeness() +
+        return "\nPrice per kilogram: " + super.getCost() + " $" +
                 "\nProducing country:" + super.getCountryProducer() +
                 "\nColor: " + color +
-                "\nStarch Percentage: " + starchPercentage +
-                "\nDiameter: " + diameter +
+                "\nStarch Percentage: " + starchPercentage + " %" +
+                "\nDiameter: " + diameter + " mm" +
                 "\nSweetness: " + sweetness;
     }
 }

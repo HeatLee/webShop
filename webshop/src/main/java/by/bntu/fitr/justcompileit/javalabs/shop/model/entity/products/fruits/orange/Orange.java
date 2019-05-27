@@ -1,4 +1,4 @@
-package by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.fruits;
+package by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.fruits.orange;
 
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Fruit;
@@ -14,7 +14,7 @@ public class Orange extends Fruit {
     public static final double DEFAULT_DIAMETER_ORANGE = 0.0;
     public static final double DEFAULT_AMOUNT_OF_VITAMIN_C_OF_ORANGE = 0.0;
 
-    private transient double diameter;
+    private double diameter;
     private double amountOfVitaminC;
 
     public Orange() {
@@ -78,9 +78,9 @@ public class Orange extends Fruit {
 
     @Override
     public String toString() {
-        return "price per kilogram: " + super.getCost() + " $" +
-                "\nproducing country: " + super.getCountryProducer() +
-                "\nvitamin C: " + amountOfVitaminC + " %" +
-                "\naverage diameter: " + diameter + " mm";
+        return "Price per kilogram: " + super.getCost() + " $" +
+                "\nProducing country: " + super.getCountryProducer() +
+                "\nVitamin C: " + amountOfVitaminC + " %" +
+                "\nAverage diameter: " + diameter + " mm";
     }
 }

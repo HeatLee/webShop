@@ -86,11 +86,10 @@ public class Cucumber extends Vegetable {
 
     @Override
     public String toString() {
-        return  "\nPrice per kilogram: " + super.getCost() +
+        return "\nPrice per kilogram: " + super.getCost() + " $" +
                 "\nProducing country:" + super.getCountryProducer() +
-                "\nRipeness: " + super.getRipeness() +
-                "\nLength: " + length +
-                "\nThickness: " + thickness +
+                "\nLength: " + length + " mm" +
+                "\nThickness: " + thickness + " mm" +
                 "\nSmoothness: " + smoothness;
     }
 }

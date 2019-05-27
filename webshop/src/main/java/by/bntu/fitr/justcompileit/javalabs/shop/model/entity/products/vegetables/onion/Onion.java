@@ -86,11 +86,10 @@ public class Onion extends Vegetable {
 
     @Override
     public String toString() {
-        return  "\nPrice per kilogram: " + super.getCost() +
+        return "\nPrice per kilogram: " + super.getCost() + " $" +
                 "\nProducing country:" + super.getCountryProducer() +
-                "\nRipeness: " + super.getRipeness() +
                 "\nColor: " + color +
-                "\nDiameter: " + diameter +
+                "\nDiameter: " + diameter + " mm" +
                 "\nSweetness: " + bitterness;
     }
 }
