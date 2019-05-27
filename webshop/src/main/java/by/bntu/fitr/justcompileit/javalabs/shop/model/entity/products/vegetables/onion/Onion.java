@@ -1,5 +1,6 @@
 package by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.vegetables.onion;
 
+import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Bitterness;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Ripeness;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.products.Vegetable;
@@ -60,6 +61,11 @@ public class Onion extends Vegetable {
 
     public void setBitterness(Bitterness bitterness) {
         this.bitterness = bitterness;
+    }
+
+    @Override
+    public Product copy() {
+        return new Onion(this);
     }
 
     @Override
