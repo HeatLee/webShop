@@ -5,7 +5,7 @@ import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Human;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.Product;
 import by.bntu.fitr.justcompileit.javalabs.shop.model.entity.User;
 import by.bntu.fitr.justcompileit.javalabs.shop.util.exceptions.logic.IndexOutOfBoundsStockException;
-import org.apache.log4j.Logger;
+import org.apache.log4j.*;
 
 public class ShopManager {
 
